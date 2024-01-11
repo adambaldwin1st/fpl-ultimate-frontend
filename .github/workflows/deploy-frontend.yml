@@ -13,6 +13,7 @@ jobs:
       - name: Build React App
         run: |
           cd fpl-ultimate
+          npm install
           npm run build
 
       - name: Compress Folder
@@ -25,7 +26,7 @@ jobs:
           host: ${{ secrets.HOST_IP_ADDRESS }}
           port: 22
           username: ${{ secrets.USER }}
-          localPath: fpl-ultimate-folder.zip
+          localPath: fpl-ultimate/fpl-ultimate-folder.zip
           remotePath: /var/www/html/fpl-ultimate/frontend/
           privateKey: ${{ secrets.FPL_ULTIMATE_PRIVATE_KEY }}
 
@@ -38,4 +39,5 @@ jobs:
           port: 22
           script: |
             unzip /var/www/html/fpl-ultimate/frontend/fpl-ultimate-folder.zip -d /var/www/html/fpl-ultimate/frontend/
+            chmod -R 755 /var/www/html/fpl-ultimate/frontend/build
             echo "${{ secrets.HOST_PASSWORD }}" | sudo -S systemctl restart nginx
