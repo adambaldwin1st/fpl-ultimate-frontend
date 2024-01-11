@@ -18,7 +18,7 @@ jobs:
 
       - name: Compress Folder
         run: |
-          zip -r fpl-ultimate-folder.zip build/
+          zip -r fpl-ultimate-folder.zip . -i build/
 
       - name: SFTP SSH Action
         uses: Creepios/sftp-action@v1.0.5
