@@ -1,0 +1,40 @@
+name: Deploy React App
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build React App
+        run: |
+          npm run build
+
+      - name: Compress Folder
+        run: |
+          zip -r fpl-ultimate-folder.zip build/
+
+      - name: SFTP SSH Action
+        uses: Creepios/sftp-action@v1.0.5
+        with:
+          host: ${{ secrets.HOST_IP_ADDRESS }}
+          port: 22
+          username: ${{ secrets.USER }}
+          localPath: fpl-ultimate-folder.zip
+          remotePath: /var/www/html/fpl-ultimate/frontend/
+          privateKey: ${{ secrets.FPL_ULTIMATE_PRIVATE_KEY }}
+
+      - name: SSH into Raspberry Pi and Force Pull
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_IP_ADDRESS }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.FPL_ULTIMATE_PRIVATE_KEY }}
+          port: 22
+          script: |
+            unzip /var/www/html/fpl-ultimate/frontend/fpl-ultimate-folder.zip -d /var/www/html/fpl-ultimate/frontend/
+            echo "${{ secrets.HOST_PASSWORD }}" | sudo -S systemctl restart nginx
