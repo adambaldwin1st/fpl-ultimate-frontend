@@ -18,7 +18,7 @@ jobs:
 
       - name: Compress Folder
         run: |
-          zip -r fpl-ultimate-folder.zip . -i build/
+          zip -r fpl-ultimate-frontend.zip . -i build/
 
       - name: SFTP SSH Action
         uses: Creepios/sftp-action@v1.0.5
@@ -26,7 +26,7 @@ jobs:
           host: ${{ secrets.HOST_IP_ADDRESS }}
           port: 22
           username: ${{ secrets.USER }}
-          localPath: fpl-ultimate/fpl-ultimate-folder.zip
+          localPath: fpl-ultimate/fpl-ultimate-frontend.zip
           remotePath: /var/www/html/fpl-ultimate/frontend/
           privateKey: ${{ secrets.FPL_ULTIMATE_PRIVATE_KEY }}
 
@@ -40,4 +40,4 @@ jobs:
           script: |
             unzip /var/www/html/fpl-ultimate/frontend/fpl-ultimate-folder.zip -d /var/www/html/fpl-ultimate/frontend/
             chmod -R 755 /var/www/html/fpl-ultimate/frontend/build
-            echo "${{ secrets.HOST_PASSWORD }}" | sudo -S systemctl restart nginx
+            sudo -S systemctl restart nginx
