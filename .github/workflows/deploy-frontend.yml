@@ -18,7 +18,7 @@ jobs:
 
       - name: Compress Folder
         run: |
-          zip -r fpl-ultimate-frontend.zip . -i build/
+          zip -r build.zip . -i build/
 
       - name: SFTP SSH Action
         uses: Creepios/sftp-action@v1.0.5
@@ -38,6 +38,6 @@ jobs:
           key: ${{ secrets.FPL_ULTIMATE_PRIVATE_KEY }}
           port: 22
           script: |
-            unzip /var/www/html/fpl-ultimate/frontend/fpl-ultimate-folder.zip -d /var/www/html/fpl-ultimate/frontend/
+            unzip /var/www/html/fpl-ultimate/frontend/build.zip -d /var/www/html/fpl-ultimate/frontend/
             chmod -R 755 /var/www/html/fpl-ultimate/frontend/build
             sudo -S systemctl restart nginx
