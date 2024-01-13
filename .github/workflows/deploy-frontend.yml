@@ -18,6 +18,7 @@ jobs:
 
       - name: Compress Folder
         run: |
+          pwd
           zip -r build.zip . -i fpl-ultimate/build/
 
       - name: SFTP SSH Action
