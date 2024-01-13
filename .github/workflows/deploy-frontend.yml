@@ -39,5 +39,5 @@ jobs:
           port: 22
           script: |
             unzip /var/www/html/fpl-ultimate/frontend/build.zip -d /var/www/html/fpl-ultimate/frontend/
-            chmod -R 755 /var/www/html/fpl-ultimate/frontend/build
+            chmod -R 755 /var/www/html/fpl-ultimate/frontend/fpl-ultimate/build
             sudo -S systemctl restart nginx
