@@ -1,4 +1,4 @@
-name: Deploy React App v2
+name: Deploy FPL Ultimate Frontend
 
 on:
   workflow_dispatch:
@@ -30,7 +30,7 @@ jobs:
           remotePath: /var/www/html/fpl-ultimate/frontend/
           privateKey: ${{ secrets.FPL_ULTIMATE_PRIVATE_KEY }}
 
-      - name: SSH into Raspberry Pi and Force Pull
+      - name: SSH Into Host to Unzip and Restart
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST_IP_ADDRESS }}
@@ -38,6 +38,6 @@ jobs:
           key: ${{ secrets.FPL_ULTIMATE_PRIVATE_KEY }}
           port: 22
           script: |
-            unzip /var/www/html/fpl-ultimate/frontend/build.zip -d /var/www/html/fpl-ultimate/frontend/
+            unzip -o /var/www/html/fpl-ultimate/frontend/build.zip -d /var/www/html/fpl-ultimate/frontend/
             chmod -R 755 /var/www/html/fpl-ultimate/frontend/fpl-ultimate/build
             sudo -S systemctl restart nginx
