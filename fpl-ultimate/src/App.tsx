@@ -1,26 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import LandingPage from './components/LandingPage';
+import SideMenu from './components/SideMenu';
+
+import 'bulma/css/bulma.min.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          FPL Ultimate
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="App" style={{ height: '100vh', display: 'flex' }}>
+            <div className="column is-one-fifth">
+                <SideMenu />
+            </div>
+            <div className="column">
+                <LandingPage />
+            </div>
+        </div>
+    );
 }
 
 export default App;

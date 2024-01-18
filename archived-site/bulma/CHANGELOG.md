@@ -1003,7 +1003,7 @@ The `$link` color is used instead of `$primary` in the following components:
 * #331 Support for third party icons
 * Added `$button-focus-box-shadow-size` and `$button-focus-box-shadow-color` for customization
 * Added `$input-focus-box-shadow-size` and `$input-focus-box-shadow-color` for customization
-* Navbar tabs
+* SideMenu tabs
 
 ### Issues closed
 
@@ -1183,7 +1183,7 @@ Variable name changes (mostly appending `-color`):
 
 ### Issues closed
 
-* Fix #827 Breadcrumb and Navbar in docs
+* Fix #827 Breadcrumb and SideMenu in docs
 * Fix #824 Code examples broken because of `text-align: center`
 * Fix #820 Loading spinner resizes with controls
 * Fix #819 Remove `height: auto` from media elements
