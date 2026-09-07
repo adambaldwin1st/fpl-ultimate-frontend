@@ -1,2 +1,11 @@
-*.idea
-*.DS_Store
+# Dependencies
+node_modules/
+
+# macOS
+.DS_Store
+
+# IntelliJ
+.idea/
+
+# Build output
+fpl-ultimate-react/build/
