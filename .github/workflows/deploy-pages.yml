@@ -31,7 +31,11 @@ jobs:
 
       - name: Install dependencies
         working-directory: fpl-ultimate
-        run: npm ci
+        # npm ci refuses this lockfile: eslint pins ajv@6 while webpack's
+        # schema-utils/ajv-keywords need ajv@8, resolved via nested (non-hoisted)
+        # installs that npm ci's strict flat-consistency check rejects even
+        # though the tree is genuinely valid. npm install handles it correctly.
+        run: npm install
 
       - name: Build
         working-directory: fpl-ultimate
