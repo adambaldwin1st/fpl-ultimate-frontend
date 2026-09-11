@@ -28,8 +28,8 @@ Hits the deployed stage API directly (`REACT_APP_API_BASE_URL` in `.env.developm
 ## Deployment
 
 Deployed to GitHub Pages, mirroring the API's stage/prod split:
-- Prod: GitHub Release → `deploy-pages-prod.yml` → `www.fplultimate.com`
-- Stage: manual dispatch (branch input) → `deploy-pages-stage.yml` → `www.fplultimate.com/stage/`
+- Prod: GitHub Release → `deploy-pages-prod.yml` → `fplultimate.com`
+- Stage: manual dispatch (branch input) → `deploy-pages-stage.yml` → `fplultimate.com/stage/`
 
 Both environments are rebuilt into one combined artifact on every deploy — GitHub Pages
 serves one site per repo, so stage lives at a subpath of prod's domain rather than its

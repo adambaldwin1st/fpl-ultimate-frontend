@@ -3,10 +3,10 @@ The fpl-ultimate-frontend repository is the frontend component of fplultimate.co
 
 ### Deployment
 The application is deployed to GitHub Pages, mirroring the API's stage/prod pattern:
-- **Prod**: publish a GitHub Release → deploys at `www.fplultimate.com` (apex
-  `fplultimate.com` redirects into it), pointed at the prod API.
+- **Prod**: publish a GitHub Release → deploys at `fplultimate.com` (`www.fplultimate.com`
+  redirects into it), pointed at the prod API.
 - **Stage**: `Actions → Deploy Pages (Stage) → Run workflow` → prompts for a branch →
-  deploys at `www.fplultimate.com/stage/`, pointed at the stage API.
+  deploys at `fplultimate.com/stage/`, pointed at the stage API.
 
 GitHub Pages only supports one live site per repo, so stage can't get its own domain
 the way the API's Lambda functions did — both environments share the same domain/cert,

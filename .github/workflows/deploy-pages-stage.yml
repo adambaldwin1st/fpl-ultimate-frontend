@@ -2,7 +2,7 @@ name: Deploy Pages (Stage)
 
 # GitHub Pages only supports one live site/domain per repo, so stage can't
 # get its own domain the way the API's Lambda functions did. Instead it's
-# served at www.fplultimate.com/stage/, sharing prod's domain and cert.
+# served at fplultimate.com/stage/, sharing prod's domain and cert.
 #
 # Every deploy (this workflow OR the prod one) has to rebuild BOTH prod (from
 # main) and stage (from the `stage` branch) into one combined artifact, since
