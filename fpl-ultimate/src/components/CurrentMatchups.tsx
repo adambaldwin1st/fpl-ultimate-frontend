@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Matchup } from '../types/league';
+import { API_BASE_URL } from '../config';
 
 const CurrentMatchups: React.FC = () => {
     const [matchups, setMatchups] = useState<Matchup[]>([]);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        fetch('/api/league/current-matchups')
+        fetch(`${API_BASE_URL}/league/current-matchups`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(`Request failed with status ${response.status}`);

@@ -2,7 +2,14 @@
 The fpl-ultimate-frontend repository is the frontend component of fplultimate.com. It enables users to draft players from the Premier League, manage their fantasy teams, and compete head-to-head for points each week.
 
 ### Deployment
-The application is hosted on a Raspberry Pi, and deploys to production are triggered via GitHub releases. Merging to the main branch initiates a deployment to dev.fplultimate.com. The API is accessible behind the `/api` endpoint for both production and development environments.
+The application is deployed to GitHub Pages at `www.fplultimate.com` (apex `fplultimate.com`
+redirects into it), triggered on push to `main`. It talks directly to the deployed API
+(currently the Lambda scraper at `api.fplultimate.com`) — see `fpl-ultimate-api`'s README
+for the API's own deploy pipeline.
+
+There's an older, currently-unused `deploy-frontend.yml` workflow (manual-dispatch only)
+from an earlier plan to SSH/SFTP a build to a self-hosted Raspberry Pi — left in place but
+superseded by the GitHub Pages workflow above.
 
 ### GitHub Issues
 All project tasks and to-dos are tracked via GitHub Issues, located in the fpl-ultimate-api repository for simplicity.

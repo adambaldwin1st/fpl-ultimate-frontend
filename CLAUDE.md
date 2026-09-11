@@ -4,7 +4,10 @@ React frontend providing a better UI for Fantasy Premier League draft data. Cons
 
 ## Active App
 
-The active application is in `fpl-ultimate-react/`. The `fpl-ultimate/` directory is an older vanilla JS version — treat it as archived.
+The active application is in `fpl-ultimate/` — React + TypeScript, actively developed
+(league standings, current matchups, calls the live API). There is no other app
+directory in this repo; an earlier `fpl-ultimate-react/` scaffold existed briefly and
+was deleted for being an unused duplicate.
 
 ## Tech Stack
 
@@ -15,17 +18,27 @@ The active application is in `fpl-ultimate-react/`. The `fpl-ultimate/` director
 ## Running Locally
 
 ```bash
-cd fpl-ultimate-react
+cd fpl-ultimate
 npm start
 ```
+
+Hits the deployed stage API directly (`REACT_APP_API_BASE_URL` in `.env.development`)
+— there's no local mock server for the Lambda API the way the Java API has WireMock.
+
+## Deployment
+
+Deployed to GitHub Pages at `www.fplultimate.com` (with `fplultimate.com` redirecting
+into it) via `.github/workflows/deploy-pages.yml`, triggered on push to `main`.
+Production API base URL is baked in at build time via `.env.production`.
 
 ## Project Structure
 
 ```
-fpl-ultimate-react/
+fpl-ultimate/
 ├── public/
 └── src/
     ├── components/    # React components
+    ├── types/         # Shared TS types, matching the API's JSON shape
     ├── App.tsx
     └── index.tsx
 ```

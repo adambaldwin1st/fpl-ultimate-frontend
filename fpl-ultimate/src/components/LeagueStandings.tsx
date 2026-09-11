@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { StandingsRow } from '../types/league';
+import { API_BASE_URL } from '../config';
 
 const LeagueStandings: React.FC = () => {
     const [standings, setStandings] = useState<StandingsRow[]>([]);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        fetch('/api/league/standings')
+        fetch(`${API_BASE_URL}/league/standings`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(`Request failed with status ${response.status}`);
