@@ -1,0 +1,81 @@
+name: Deploy Pages (Prod)
+
+# See deploy-pages-stage.yml for why this rebuilds both environments into one
+# combined artifact. This workflow rebuilds stage from whatever the `stage`
+# branch currently points at (last thing deployed via the stage workflow) so
+# a prod release doesn't wipe out a stage deploy someone's actively testing.
+# If `stage` doesn't exist yet (no stage deploy has ever run), it just skips
+# it — the site serves prod at / with nothing at /stage/ until that happens.
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout release ${{ github.event.release.tag_name }}
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+          path: prod-src
+
+      - name: Checkout stage branch, if it exists
+        id: checkout_stage
+        continue-on-error: true
+        uses: actions/checkout@v4
+        with:
+          ref: stage
+          path: stage-src
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build prod (served at /)
+        working-directory: prod-src/fpl-ultimate
+        run: npm install && npm run build
+
+      - name: Build stage (served at /stage/), if it exists
+        if: steps.checkout_stage.outcome == 'success'
+        working-directory: stage-src/fpl-ultimate
+        run: |
+          export REACT_APP_API_BASE_URL=https://stage.api.fplultimate.com
+          export PUBLIC_URL=/stage
+          npm install
+          npm run build
+
+      - name: Assemble combined artifact
+        run: |
+          mkdir -p combined
+          cp -r prod-src/fpl-ultimate/build/. combined/
+          if [ -d stage-src/fpl-ultimate/build ]; then
+            mkdir -p combined/stage
+            cp -r stage-src/fpl-ultimate/build/. combined/stage/
+          fi
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: combined
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

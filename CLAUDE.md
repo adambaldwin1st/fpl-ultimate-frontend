@@ -27,9 +27,17 @@ Hits the deployed stage API directly (`REACT_APP_API_BASE_URL` in `.env.developm
 
 ## Deployment
 
-Deployed to GitHub Pages at `www.fplultimate.com` (with `fplultimate.com` redirecting
-into it) via `.github/workflows/deploy-pages.yml`, triggered on push to `main`.
-Production API base URL is baked in at build time via `.env.production`.
+Deployed to GitHub Pages, mirroring the API's stage/prod split:
+- Prod: GitHub Release → `deploy-pages-prod.yml` → `www.fplultimate.com`
+- Stage: manual dispatch (branch input) → `deploy-pages-stage.yml` → `www.fplultimate.com/stage/`
+
+Both environments are rebuilt into one combined artifact on every deploy — GitHub Pages
+serves one site per repo, so stage lives at a subpath of prod's domain rather than its
+own. The `stage` branch is a pointer the stage workflow force-updates to whatever branch
+was deployed, so the prod workflow can rebuild that same stage content without wiping it
+out on release. `REACT_APP_API_BASE_URL` and `PUBLIC_URL` differ per environment/build
+(see the workflow files) — `.env.production`/`.env.development` only cover the prod build
+and local dev, respectively.
 
 ## Project Structure
 

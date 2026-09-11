@@ -1,0 +1,86 @@
+name: Deploy Pages (Stage)
+
+# GitHub Pages only supports one live site/domain per repo, so stage can't
+# get its own domain the way the API's Lambda functions did. Instead it's
+# served at www.fplultimate.com/stage/, sharing prod's domain and cert.
+#
+# Every deploy (this workflow OR the prod one) has to rebuild BOTH prod (from
+# main) and stage (from the `stage` branch) into one combined artifact, since
+# actions/deploy-pages replaces the whole site each time — there's no way to
+# update just one subtree. This workflow updates the `stage` branch to point
+# at whatever branch you ask it to deploy, so the prod workflow can later
+# rebuild that same content without needing to know which branch it came from.
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch to deploy to stage"
+        required: true
+        default: "main"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ${{ inputs.branch }}
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
+          path: stage-src
+
+      - name: Point stage branch at this commit
+        run: git -C stage-src push origin HEAD:refs/heads/stage --force
+
+      - name: Checkout prod (main)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: prod-src
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build prod (served at /)
+        working-directory: prod-src/fpl-ultimate
+        run: npm install && npm run build
+
+      - name: Build stage (served at /stage/)
+        working-directory: stage-src/fpl-ultimate
+        run: |
+          export REACT_APP_API_BASE_URL=https://stage.api.fplultimate.com
+          export PUBLIC_URL=/stage
+          npm install
+          npm run build
+
+      - name: Assemble combined artifact
+        run: |
+          mkdir -p combined/stage
+          cp -r prod-src/fpl-ultimate/build/. combined/
+          cp -r stage-src/fpl-ultimate/build/. combined/stage/
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: combined
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

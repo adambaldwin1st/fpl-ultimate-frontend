@@ -2,10 +2,17 @@
 The fpl-ultimate-frontend repository is the frontend component of fplultimate.com. It enables users to draft players from the Premier League, manage their fantasy teams, and compete head-to-head for points each week.
 
 ### Deployment
-The application is deployed to GitHub Pages at `www.fplultimate.com` (apex `fplultimate.com`
-redirects into it), triggered on push to `main`. It talks directly to the deployed API
-(currently the Lambda scraper at `api.fplultimate.com`) — see `fpl-ultimate-api`'s README
-for the API's own deploy pipeline.
+The application is deployed to GitHub Pages, mirroring the API's stage/prod pattern:
+- **Prod**: publish a GitHub Release → deploys at `www.fplultimate.com` (apex
+  `fplultimate.com` redirects into it), pointed at the prod API.
+- **Stage**: `Actions → Deploy Pages (Stage) → Run workflow` → prompts for a branch →
+  deploys at `www.fplultimate.com/stage/`, pointed at the stage API.
+
+GitHub Pages only supports one live site per repo, so stage can't get its own domain
+the way the API's Lambda functions did — both environments share the same domain/cert,
+with stage living at a subpath. Every deploy rebuilds BOTH environments into one combined
+artifact (see the workflow files for why), so a prod release won't wipe out an in-progress
+stage deploy, and vice versa.
 
 There's an older, currently-unused `deploy-frontend.yml` workflow (manual-dispatch only)
 from an earlier plan to SSH/SFTP a build to a self-hosted Raspberry Pi — left in place but
