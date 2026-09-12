@@ -44,7 +44,7 @@ const PointsScreen: React.FC = () => {
     );
 
     return (
-        <div style={{ maxWidth: '900px', margin: '0 auto', padding: '1.5rem' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '1.5rem' }}>
             <div className="is-flex is-justify-content-space-between is-align-items-center mb-4">
                 <button className="button is-white" onClick={() => goToMatchup(-1)} disabled={matchupsLoading} aria-label="Previous matchup">
                     <span className="icon">
@@ -80,7 +80,10 @@ const PointsScreen: React.FC = () => {
                         </p>
                         <div className="columns is-mobile is-vcentered">
                             <div className="column has-text-centered">
-                                <p className="title is-5 has-text-primary">{points.selectedTeam.teamName}</p>
+                                <p className="title is-5 has-text-primary mb-1">{points.selectedTeam.teamName}</p>
+                                <p className="is-size-7 mb-2" style={{ color: 'var(--color-text-muted)' }}>
+                                    {points.selectedTeam.managerName}
+                                </p>
                                 <p className="title is-2">{points.selectedTeam.totalPoints}</p>
                             </div>
                             <div className="column is-narrow has-text-centered">
@@ -89,14 +92,23 @@ const PointsScreen: React.FC = () => {
                                 </p>
                             </div>
                             <div className="column has-text-centered">
-                                <p className="title is-5">{points.opponentTeam.teamName}</p>
+                                <p className="title is-5 mb-1">{points.opponentTeam.teamName}</p>
+                                <p className="is-size-7 mb-2" style={{ color: 'var(--color-text-muted)' }}>
+                                    {points.opponentTeam.managerName}
+                                </p>
                                 <p className="title is-2">{points.opponentTeam.totalPoints}</p>
                             </div>
                         </div>
                     </div>
 
-                    <TeamRoster team={points.selectedTeam} onSelectPlayer={setActivePlayer} />
-                    <TeamRoster team={points.opponentTeam} onSelectPlayer={setActivePlayer} />
+                    <div className="columns">
+                        <div className="column">
+                            <TeamRoster team={points.selectedTeam} onSelectPlayer={setActivePlayer} />
+                        </div>
+                        <div className="column">
+                            <TeamRoster team={points.opponentTeam} onSelectPlayer={setActivePlayer} />
+                        </div>
+                    </div>
                 </>
             )}
 

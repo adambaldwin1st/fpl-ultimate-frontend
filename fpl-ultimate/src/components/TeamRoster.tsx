@@ -12,9 +12,10 @@ const TeamRoster: React.FC<TeamRosterProps> = ({ team, onSelectPlayer }) => {
 
     return (
         <div className="card-surface mb-5">
-            <p className="has-text-weight-semibold p-3 mb-0" style={{ borderBottom: '1px solid var(--color-border)' }}>
-                {team.teamName}
-            </p>
+            <div className="p-3" style={{ borderBottom: '1px solid var(--color-border)' }}>
+                <p className="has-text-weight-semibold mb-0">{team.teamName}</p>
+                <p className="is-size-7 mb-0" style={{ color: 'var(--color-text-muted)' }}>{team.managerName}</p>
+            </div>
             {team.players.map((player) => {
                 const showPositionHeading = player.isStarter && player.positionType !== lastPositionType;
                 if (player.isStarter) {
