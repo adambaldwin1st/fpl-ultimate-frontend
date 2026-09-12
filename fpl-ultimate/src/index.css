@@ -1,5 +1,18 @@
+:root {
+  --color-primary: #146c43;
+  --color-primary-dark: #0f5233;
+  --color-accent: #d4a017;
+  --color-bg: #f7f8f5;
+  --color-surface: #ffffff;
+  --color-text: #1a1a1a;
+  --color-text-muted: #6b7280;
+  --color-border: #e5e7eb;
+}
+
 body {
   margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -10,4 +23,23 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.card-surface {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.own-team-row {
+  background-color: rgba(20, 108, 67, 0.08);
+}
+
+.own-team-row td:first-child {
+  border-left: 3px solid var(--color-primary);
 }

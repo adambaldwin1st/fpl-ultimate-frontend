@@ -1,62 +1,56 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { StandingsRow } from '../types/league';
-import { API_BASE_URL } from '../config';
+import { useApiData } from '../hooks/useApiData';
+import { MY_TEAM_NAME } from '../config';
 
 const LeagueStandings: React.FC = () => {
-    const [standings, setStandings] = useState<StandingsRow[]>([]);
-    const [error, setError] = useState<string | null>(null);
+    const { data: standings, loading, error } = useApiData<StandingsRow[]>('/league/standings', []);
 
-    useEffect(() => {
-        fetch(`${API_BASE_URL}/league/standings`)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`Request failed with status ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(setStandings)
-            .catch((err) => setError(err.message));
-    }, []);
+    if (loading) {
+        return <p style={{ color: 'var(--color-text-muted)' }}>Loading standings…</p>;
+    }
 
     if (error) {
         return <p className="has-text-danger">Couldn't load standings: {error}</p>;
     }
 
     return (
-        <table className="table is-fullwidth is-striped">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Team</th>
-                    <th>Manager</th>
-                    <th>P</th>
-                    <th>W</th>
-                    <th>D</th>
-                    <th>L</th>
-                    <th>PF</th>
-                    <th>PA</th>
-                    <th>Pts</th>
-                </tr>
-            </thead>
-            <tbody>
-                {standings.map((row) => (
-                    <tr key={row.rank + row.teamName}>
-                        <td>{row.rank}</td>
-                        <td>{row.teamName}</td>
-                        <td>{row.managerName}</td>
-                        <td>{row.played}</td>
-                        <td>{row.won}</td>
-                        <td>{row.drawn}</td>
-                        <td>{row.lost}</td>
-                        <td>{row.pointsFor}</td>
-                        <td>{row.pointsAgainst}</td>
-                        <td>
-                            <strong>{row.leaguePoints}</strong>
-                        </td>
+        <div className="card-surface table-scroll">
+            <table className="table is-fullwidth is-striped mb-0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Team</th>
+                        <th>Manager</th>
+                        <th>P</th>
+                        <th>W</th>
+                        <th>D</th>
+                        <th>L</th>
+                        <th>PF</th>
+                        <th>PA</th>
+                        <th>Pts</th>
                     </tr>
-                ))}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {standings.map((row) => (
+                        <tr key={row.rank + row.teamName} className={row.teamName === MY_TEAM_NAME ? 'own-team-row' : ''}>
+                            <td>{row.rank}</td>
+                            <td className="has-text-weight-semibold">{row.teamName}</td>
+                            <td>{row.managerName}</td>
+                            <td>{row.played}</td>
+                            <td>{row.won}</td>
+                            <td>{row.drawn}</td>
+                            <td>{row.lost}</td>
+                            <td>{row.pointsFor}</td>
+                            <td>{row.pointsAgainst}</td>
+                            <td>
+                                <strong>{row.leaguePoints}</strong>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     );
 };
 

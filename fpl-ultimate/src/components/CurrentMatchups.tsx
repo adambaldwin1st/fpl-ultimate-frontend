@@ -1,48 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Matchup } from '../types/league';
-import { API_BASE_URL } from '../config';
+import { useApiData } from '../hooks/useApiData';
+import { MY_TEAM_NAME } from '../config';
+import MatchupCard from './MatchupCard';
 
 const CurrentMatchups: React.FC = () => {
-    const [matchups, setMatchups] = useState<Matchup[]>([]);
-    const [error, setError] = useState<string | null>(null);
+    const { data: matchups, loading, error } = useApiData<Matchup[]>('/league/current-matchups', []);
 
-    useEffect(() => {
-        fetch(`${API_BASE_URL}/league/current-matchups`)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`Request failed with status ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(setMatchups)
-            .catch((err) => setError(err.message));
-    }, []);
+    if (loading) {
+        return <p style={{ color: 'var(--color-text-muted)' }}>Loading matchups…</p>;
+    }
 
     if (error) {
         return <p className="has-text-danger">Couldn't load this week's matchups: {error}</p>;
     }
 
+    const myMatchup = matchups.find(
+        (m) => m.homeTeamName === MY_TEAM_NAME || m.awayTeamName === MY_TEAM_NAME
+    );
+    const otherMatchups = matchups.filter((m) => m !== myMatchup);
+
     return (
-        <div className="columns is-multiline">
-            {matchups.map((matchup) => (
-                <div className="column is-half" key={`${matchup.homeTeamName}-${matchup.awayTeamName}`}>
-                    <div className="box">
-                        <p className="has-text-weight-semibold">Gameweek {matchup.gameweek}</p>
-                        <div className="level">
-                            <div className="level-left">
-                                <span>{matchup.homeTeamName}</span>
-                            </div>
-                            <div className="level-right">
-                                <span className="tag is-medium">
-                                    {matchup.homeScore} - {matchup.awayScore}
-                                </span>
-                            </div>
-                        </div>
-                        <p>{matchup.awayTeamName}</p>
-                        <p className="is-size-7 has-text-grey">{matchup.finished ? 'Final' : 'Live'}</p>
-                    </div>
-                </div>
-            ))}
+        <div>
+            {myMatchup && <MatchupCard matchup={myMatchup} featured />}
+
+            <div className="columns is-multiline">
+                {otherMatchups.map((matchup) => (
+                    <MatchupCard key={`${matchup.homeTeamName}-${matchup.awayTeamName}`} matchup={matchup} />
+                ))}
+            </div>
         </div>
     );
 };
