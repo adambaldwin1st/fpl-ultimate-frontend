@@ -2,9 +2,9 @@ import React from 'react';
 import LeagueStandings from './LeagueStandings';
 import CurrentMatchups from './CurrentMatchups';
 
-const LandingPage: React.FC = () => {
+const LeagueTableScreen: React.FC = () => {
     return (
-        <div className="p-4-mobile p-6-tablet" style={{ maxWidth: '1100px', margin: '0 auto', padding: '1.5rem' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '1.5rem' }}>
             <h2 className="title is-4">This Week's Matchups</h2>
             <CurrentMatchups />
 
@@ -14,4 +14,4 @@ const LandingPage: React.FC = () => {
     );
 };
 
-export default LandingPage;
+export default LeagueTableScreen;
