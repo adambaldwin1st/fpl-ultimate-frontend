@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>League Table — Mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+:root{--color-primary:#7c3aed;--color-primary-light:#a78bfa;--color-primary-dark:#4c1d95;--color-accent:#22c55e;--color-blue:#3b82f6;--color-bg:#0f0c1a;--color-surface:#1a1530;--color-surface-alt:#221c3d;--color-text:#f5f4fa;--color-text-muted:#9691b8;--color-border:#322b52;}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:var(--color-bg);color:var(--color-text);}
+a{color:inherit;text-decoration:none;}
+</style>
+</helmet>
+<div style="width: 390px; height: 1500px; box-sizing: border-box; background: var(--color-bg); display: flex; flex-direction: column; position: relative;">
+
+  <div style="height: 56px; flex-shrink: 0; background: linear-gradient(90deg, #4c1d95 0%, #1e3a8a 100%); display: flex; align-items: center; justify-content: space-between; padding: 0 16px; box-sizing: border-box;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <div style="width: 30px; height: 30px; border-radius: 8px; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center;">
+        <span style="color: var(--color-accent); font-weight: 800; font-size: 12px;">FU</span>
+      </div>
+      <span style="color: #fff; font-weight: 700; font-size: 15px;">FPL Ultimate</span>
+    </div>
+    <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--color-blue); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff;">AB</div>
+  </div>
+
+  <div style="flex-grow: 1; overflow: hidden; padding: 20px 16px 100px;">
+    <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 4px;">
+      <h1 style="margin: 0; font-size: 20px; font-weight: 700;">League Table</h1>
+      <span style="font-size: 13px; color: var(--color-text-muted); font-weight: 600;">Gameweek 5</span>
+    </div>
+
+    <p style="margin: 20px 0 10px; font-size: 13px; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.03em;">This week's matchups</p>
+
+    <sc-for list="{{matchups}}" as="m" hint-placeholder-count="4">
+      <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 10px; padding: 14px; margin-bottom: 10px; box-shadow: 0 1px 2px rgba(0,0,0,0.03);">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="flex: 1; min-width: 0; text-align: right; font-size: 13px; font-weight: {{m.homeBold}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{m.home}}</span>
+          <span style="flex-shrink: 0; font-size: 17px; font-weight: 800; white-space: nowrap;">{{m.homeScore}} - {{m.awayScore}}</span>
+          <span style="flex: 1; min-width: 0; text-align: left; font-size: 13px; font-weight: {{m.awayBold}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{m.away}}</span>
+        </div>
+        <div style="margin-top: 10px; text-align: center;">
+          <span style="font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; background: {{m.badgeBg}}; color: {{m.badgeColor}};">{{m.badgeText}}</span>
+        </div>
+      </div>
+    </sc-for>
+
+    <p style="margin: 24px 0 10px; font-size: 13px; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.03em;">Standings</p>
+
+    <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 10px; overflow: hidden;">
+      <sc-for list="{{standings}}" as="row" hint-placeholder-count="8">
+        <div style="display: flex; align-items: center; padding: 11px 14px; border-bottom: 1px solid var(--color-border); background: {{row.rowBg}}; border-left: 3px solid {{row.accentBorder}};">
+          <span style="width: 22px; font-size: 13px; font-weight: 700; color: var(--color-text-muted);">{{row.rank}}</span>
+          <div style="flex-grow: 1; min-width: 0;">
+            <p style="margin: 0; font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{row.team}}</p>
+            <p style="margin: 0; font-size: 11px; color: var(--color-text-muted);">{{row.record}}</p>
+          </div>
+          <span style="font-size: 16px; font-weight: 800; color: var(--color-accent);">{{row.pts}}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="position: absolute; bottom: 0; left: 0; width: 390px; height: 64px; box-sizing: border-box; background: var(--color-surface); border-top: 1px solid var(--color-border); display: flex; align-items: center;">
+    <a href="LeagueTableMobile.dc.html" style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--color-blue);">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0V4Z"></path><path d="M7 5H4a1 1 0 0 0-1 1v1a4 4 0 0 0 4 4M17 5h3a1 1 0 0 1 1 1v1a4 4 0 0 1-4 4"></path></svg>
+      <span style="font-size: 11px; font-weight: 700;">League</span>
+    </a>
+    <a href="MyTeamMobile.dc.html" style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--color-text-muted);">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4 4 7l2 3 2-1v11h8V9l2 1 2-3-4-3-2 2h-4L8 4Z"></path></svg>
+      <span style="font-size: 11px; font-weight: 600;">My Team</span>
+    </a>
+    <a href="PlayersMobile.dc.html" style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--color-text-muted);">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg>
+      <span style="font-size: 11px; font-weight: 600;">Players</span>
+    </a>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1500}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const matchups = [
+      { home: "Baldwin's Ballers", homeScore: 68, homeBold: 800, away: "Wenger's Wizards", awayScore: 54, awayBold: 600, badgeText: "FINAL", badgeBg: "#322b52", badgeColor: "#c9c4de" },
+      { home: "Tactical Nightmare", homeScore: 61, homeBold: 600, away: "Salah's Saints", awayScore: 61, awayBold: 600, badgeText: "FINAL — DRAW", badgeBg: "#322b52", badgeColor: "#c9c4de" },
+      { home: "Haaland's Heroes", homeScore: 45, homeBold: 600, away: "Midfield Maestros", awayScore: 39, awayBold: 600, badgeText: "LIVE", badgeBg: "rgba(34,197,94,0.16)", badgeColor: "#22c55e" },
+      { home: "Set Piece Specialists", homeScore: 32, homeBold: 600, away: "Kane and Able", awayScore: 41, awayBold: 600, badgeText: "LIVE", badgeBg: "rgba(34,197,94,0.16)", badgeColor: "#22c55e" }
+    ];
+
+    const rows = [
+      { rank: 1, team: "Baldwin's Ballers", manager: "Adam B.", p: 5, w: 4, d: 0, l: 1, pts: 12, own: true },
+      { rank: 2, team: "Salah's Saints", manager: "Maya O.", p: 5, w: 3, d: 1, l: 1, pts: 10, own: false },
+      { rank: 3, team: "Haaland's Heroes", manager: "Raj P.", p: 5, w: 3, d: 0, l: 2, pts: 9, own: false },
+      { rank: 4, team: "Kane and Able", manager: "Sam D.", p: 5, w: 3, d: 0, l: 2, pts: 9, own: false },
+      { rank: 5, team: "Wenger's Wizards", manager: "Chris M.", p: 5, w: 2, d: 1, l: 2, pts: 7, own: false },
+      { rank: 6, team: "Tactical Nightmare", manager: "Jordan K.", p: 5, w: 2, d: 1, l: 2, pts: 7, own: false },
+      { rank: 7, team: "Midfield Maestros", manager: "Lin C.", p: 5, w: 1, d: 1, l: 3, pts: 4, own: false },
+      { rank: 8, team: "Set Piece Specialists", manager: "Kyle B.", p: 5, w: 0, d: 2, l: 3, pts: 2, own: false }
+    ];
+
+    const standings = rows.map((r) => ({
+      rank: r.rank,
+      team: r.team,
+      record: `${r.manager} · ${r.w}-${r.l}-${r.d}`,
+      pts: r.pts,
+      rowBg: r.own ? 'rgba(34,197,94,0.12)' : 'transparent',
+      accentBorder: r.own ? '#22c55e' : 'transparent'
+    }));
+
+    return { matchups, standings };
+  }
+}
+</script>
+</body>
+</html>

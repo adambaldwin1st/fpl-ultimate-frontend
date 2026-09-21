@@ -1,0 +1,118 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "LeagueTableDesktop.dc.html": {
+      "h": 1000,
+      "is_interactive": true,
+      "title": "League Table · Desktop",
+      "w": 1440,
+      "x": 3040,
+      "y": 1900
+    },
+    "LeagueTableMobile.dc.html": {
+      "h": 1500,
+      "is_interactive": true,
+      "title": "League Table · Mobile",
+      "w": 390,
+      "x": 940,
+      "y": 0
+    },
+    "LoginDesktop.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "Log In · Desktop",
+      "w": 1440,
+      "x": 0,
+      "y": 1900
+    },
+    "Main.dc.html": {
+      "h": 760,
+      "is_interactive": true,
+      "title": "Log In · Mobile",
+      "w": 390,
+      "x": 0,
+      "y": 0
+    },
+    "MyTeamDesktop.dc.html": {
+      "h": 1120,
+      "is_interactive": true,
+      "title": "My Team · Desktop",
+      "w": 1440,
+      "x": 4560,
+      "y": 1900
+    },
+    "MyTeamMobile.dc.html": {
+      "h": 1150,
+      "is_interactive": true,
+      "title": "My Team · Mobile",
+      "w": 390,
+      "x": 1410,
+      "y": 0
+    },
+    "PlayersDesktop.dc.html": {
+      "h": 1060,
+      "is_interactive": true,
+      "title": "Players · Desktop",
+      "w": 1440,
+      "x": 6080,
+      "y": 1900
+    },
+    "PlayersMobile.dc.html": {
+      "h": 1440,
+      "is_interactive": true,
+      "title": "Players · Mobile",
+      "w": 390,
+      "x": 1880,
+      "y": 0
+    },
+    "SignupDesktop.dc.html": {
+      "h": 950,
+      "is_interactive": true,
+      "title": "Sign Up · Desktop",
+      "w": 1440,
+      "x": 1520,
+      "y": 1900
+    },
+    "SignupMobile.dc.html": {
+      "h": 820,
+      "is_interactive": true,
+      "title": "Sign Up · Mobile",
+      "w": 390,
+      "x": 470,
+      "y": 0
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-09-21T16:00:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas"
+  },
+  "notes": {
+    "overview-title": {
+      "kind": "title1",
+      "maxW": 2270,
+      "text": "FPL Ultimate — Site Flow",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "LoginDesktop.dc.html",
+    "SignupMobile.dc.html",
+    "SignupDesktop.dc.html",
+    "LeagueTableMobile.dc.html",
+    "LeagueTableDesktop.dc.html",
+    "MyTeamMobile.dc.html",
+    "MyTeamDesktop.dc.html",
+    "PlayersMobile.dc.html",
+    "PlayersDesktop.dc.html"
+  ],
+  "pages": [],
+  "title": "FPL Ultimate — Site Flow"
+}

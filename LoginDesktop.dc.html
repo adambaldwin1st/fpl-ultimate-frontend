@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Log In — Desktop</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+:root{--color-primary:#7c3aed;--color-primary-light:#a78bfa;--color-primary-dark:#4c1d95;--color-accent:#22c55e;--color-blue:#3b82f6;--color-bg:#0f0c1a;--color-surface:#1a1530;--color-surface-alt:#221c3d;--color-text:#f5f4fa;--color-text-muted:#9691b8;--color-border:#322b52;}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:var(--color-bg);color:var(--color-text);}
+a{color:inherit;text-decoration:none;}
+input{font-family:inherit;}
+</style>
+</helmet>
+<div style="width: 1440px; height: 900px; box-sizing: border-box; display: flex;">
+
+  <div style="width: 560px; flex-shrink: 0; background: linear-gradient(160deg, #6d28d9 0%, #1e3a8a 100%); display: flex; flex-direction: column; justify-content: center; padding: 72px; box-sizing: border-box;">
+    <div style="width: 56px; height: 56px; border-radius: 14px; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+      <span style="color: var(--color-accent); font-weight: 800; font-size: 20px;">FU</span>
+    </div>
+    <h1 style="margin: 0 0 12px; color: #fff; font-size: 36px; font-weight: 800; line-height: 1.2;">FPL Ultimate</h1>
+    <p style="margin: 0 0 40px; color: rgba(255,255,255,0.75); font-size: 16px; line-height: 1.5; max-width: 380px;">A cleaner way to follow your Fantasy Premier League draft league — standings, head-to-head points and player stats in one place.</p>
+
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+        <span style="color: #fff; font-size: 14px;">Live league standings</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+        <span style="color: #fff; font-size: 14px;">Head-to-head gameweek points</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+        <span style="color: #fff; font-size: 14px;">Full player search &amp; stats</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="flex-grow: 1; display: flex; align-items: center; justify-content: center; background: var(--color-bg);">
+    <div style="width: 420px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 14px; padding: 36px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+      <p style="margin: 0 0 4px; font-size: 22px; font-weight: 700;">Log in</p>
+      <p style="margin: 0 0 24px; font-size: 14px; color: var(--color-text-muted);">Welcome back to your league.</p>
+
+      <label style="display: block; font-size: 13px; font-weight: 600; color: var(--color-text-muted); margin-bottom: 6px;" for="email-d">Email</label>
+      <div style="display: flex; align-items: center; gap: 8px; border: 1px solid var(--color-border); border-radius: 8px; padding: 11px 12px; margin-bottom: 18px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9691b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg>
+        <input id="email-d" type="email" placeholder="you@example.com" style="border: none; outline: none; flex-grow: 1; font-size: 14px; background: transparent;">
+      </div>
+
+      <label style="display: block; font-size: 13px; font-weight: 600; color: var(--color-text-muted); margin-bottom: 6px;" for="pw-d">Password</label>
+      <div style="display: flex; align-items: center; gap: 8px; border: 1px solid var(--color-border); border-radius: 8px; padding: 11px 12px; margin-bottom: 10px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9691b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
+        <input id="pw-d" type="password" placeholder="••••••••" style="border: none; outline: none; flex-grow: 1; font-size: 14px; background: transparent;">
+      </div>
+
+      <div style="text-align: right; margin-bottom: 24px;">
+        <a href="#" style="font-size: 13px; color: var(--color-text-muted);">Forgot password?</a>
+      </div>
+
+      <a href="LeagueTableDesktop.dc.html" style="display: block; text-align: center; background: var(--color-primary); color: #fff; font-weight: 700; font-size: 15px; padding: 13px; border-radius: 8px;">Log in</a>
+
+      <p style="margin: 20px 0 0; text-align: center; font-size: 14px; color: var(--color-text-muted);">
+        Don't have an account? <a href="SignupDesktop.dc.html" style="color: var(--color-primary-light); font-weight: 700;">Sign up</a>
+      </p>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

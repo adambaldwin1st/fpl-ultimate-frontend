@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sign Up — Mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+:root{--color-primary:#7c3aed;--color-primary-light:#a78bfa;--color-primary-dark:#4c1d95;--color-accent:#22c55e;--color-blue:#3b82f6;--color-bg:#0f0c1a;--color-surface:#1a1530;--color-surface-alt:#221c3d;--color-text:#f5f4fa;--color-text-muted:#9691b8;--color-border:#322b52;}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:var(--color-bg);color:var(--color-text);}
+a{color:inherit;text-decoration:none;}
+input{font-family:inherit;}
+</style>
+</helmet>
+<div style="width: 390px; height: 820px; box-sizing: border-box; background: var(--color-bg); display: flex; flex-direction: column; align-items: center; padding: 48px 24px 32px;">
+
+  <div style="width: 56px; height: 56px; border-radius: 14px; background: var(--color-primary); display: flex; align-items: center; justify-content: center; margin-bottom: 14px;">
+    <span style="color: var(--color-accent); font-weight: 800; font-size: 19px;">FU</span>
+  </div>
+  <h1 style="margin: 0; font-size: 20px; font-weight: 700;">Create your account</h1>
+  <p style="margin: 6px 0 24px; font-size: 14px; color: var(--color-text-muted); text-align: center;">One account, any number of league teams.</p>
+
+  <div style="width: 100%; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 22px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+
+    <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+      <div style="flex: 1;">
+        <label style="display: block; font-size: 13px; font-weight: 600; color: var(--color-text-muted); margin-bottom: 6px;" for="fname-m">First name</label>
+        <input id="fname-m" type="text" placeholder="Adam" style="width: 100%; box-sizing: border-box; border: 1px solid var(--color-border); border-radius: 8px; padding: 10px 12px; font-size: 14px; background: transparent; color: var(--color-text);">
+      </div>
+      <div style="flex: 1;">
+        <label style="display: block; font-size: 13px; font-weight: 600; color: var(--color-text-muted); margin-bottom: 6px;" for="lname-m">Last name</label>
+        <input id="lname-m" type="text" placeholder="Baldwin" style="width: 100%; box-sizing: border-box; border: 1px solid var(--color-border); border-radius: 8px; padding: 10px 12px; font-size: 14px; background: transparent; color: var(--color-text);">
+      </div>
+    </div>
+
+    <label style="display: block; font-size: 13px; font-weight: 600; color: var(--color-text-muted); margin-bottom: 6px;" for="email-sm">Email</label>
+    <input id="email-sm" type="email" placeholder="you@example.com" style="width: 100%; box-sizing: border-box; border: 1px solid var(--color-border); border-radius: 8px; padding: 10px 12px; font-size: 14px; margin-bottom: 16px; background: transparent; color: var(--color-text);">
+
+    <label style="display: block; font-size: 13px; font-weight: 600; color: var(--color-text-muted); margin-bottom: 6px;" for="pw-sm">Password</label>
+    <input id="pw-sm" type="password" placeholder="••••••••" style="width: 100%; box-sizing: border-box; border: 1px solid var(--color-border); border-radius: 8px; padding: 10px 12px; font-size: 14px; margin-bottom: 20px; background: transparent; color: var(--color-text);">
+
+    <a href="LeagueTableMobile.dc.html" style="display: block; text-align: center; background: var(--color-primary); color: #fff; font-weight: 700; font-size: 15px; padding: 12px; border-radius: 8px;">Create account</a>
+  </div>
+
+  <p style="margin-top: 20px; font-size: 14px; color: var(--color-text-muted);">
+    Already have an account? <a href="Main.dc.html" style="color: var(--color-primary-light); font-weight: 700;">Log in</a>
+  </p>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":820}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

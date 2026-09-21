@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Players — Desktop</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+:root{--color-primary:#7c3aed;--color-primary-light:#a78bfa;--color-primary-dark:#4c1d95;--color-accent:#22c55e;--color-blue:#3b82f6;--color-bg:#0f0c1a;--color-surface:#1a1530;--color-surface-alt:#221c3d;--color-text:#f5f4fa;--color-text-muted:#9691b8;--color-border:#322b52;}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:var(--color-bg);color:var(--color-text);}
+a{color:inherit;text-decoration:none;}
+input{font-family:inherit;}
+table{border-collapse:collapse;width:100%;}
+th{font-size:12px;text-transform:uppercase;letter-spacing:0.04em;color:var(--color-text-muted);font-weight:700;text-align:left;padding:0 16px 10px;}
+td{padding:13px 16px;font-size:14px;border-top:1px solid var(--color-border);}
+tr{cursor:pointer;}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1060px; box-sizing: border-box; background: var(--color-bg); position: relative;">
+
+  <div style="height: 64px; background: linear-gradient(90deg, #4c1d95 0%, #1e3a8a 100%); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; box-sizing: border-box;">
+    <div style="display: flex; align-items: center; gap: 40px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center;">
+          <span style="color: var(--color-accent); font-weight: 800; font-size: 13px;">FU</span>
+        </div>
+        <span style="color: #fff; font-weight: 700; font-size: 16px;">FPL Ultimate</span>
+      </div>
+      <div style="display: flex; gap: 4px;">
+        <a href="LeagueTableDesktop.dc.html" style="color: rgba(255,255,255,0.75); font-weight: 600; font-size: 14px; padding: 10px 14px; border-bottom: 2px solid transparent;">League Table</a>
+        <a href="MyTeamDesktop.dc.html" style="color: rgba(255,255,255,0.75); font-weight: 600; font-size: 14px; padding: 10px 14px; border-bottom: 2px solid transparent;">My Team</a>
+        <a href="PlayersDesktop.dc.html" style="color: #fff; font-weight: 700; font-size: 14px; padding: 10px 14px; border-bottom: 2px solid var(--color-blue);">Players</a>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <div style="width: 30px; height: 30px; border-radius: 50%; background: var(--color-blue); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff;">AB</div>
+      <span style="color: #fff; font-size: 14px; font-weight: 600;">Adam</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+    </div>
+  </div>
+
+  <div style="max-width: 1100px; margin: 0 auto; padding: 36px 24px 60px;">
+    <h1 style="margin: 0 0 20px; font-size: 26px; font-weight: 700;">Players</h1>
+
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; gap: 16px;">
+      <div style="display: flex; align-items: center; gap: 8px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 10px 14px; width: 320px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9691b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg>
+        <input type="text" placeholder="Search players…" onInput="{{onSearch}}" style="border: none; outline: none; flex-grow: 1; font-size: 14px; background: transparent; color: var(--color-text);">
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <sc-for list="{{filters}}" as="f" hint-placeholder-count="5">
+          <a href="#" onClick="{{f.pick}}" style="font-size: 13px; font-weight: 700; padding: 8px 16px; border-radius: 20px; background: {{f.bg}}; color: {{f.color}}; border: 1px solid {{f.border}};">{{f.label}}</a>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 10px; overflow: hidden; padding: 8px 4px;">
+      <table>
+        <thead>
+          <tr><th>Player</th><th>Club</th><th>Pos</th><th>Pts</th></tr>
+        </thead>
+        <tbody>
+          <sc-for list="{{players}}" as="p" hint-placeholder-count="12">
+            <tr onClick="{{p.pick}}">
+              <td style="font-weight: 600;">{{p.name}}</td>
+              <td style="color: var(--color-text-muted);">{{p.club}}</td>
+              <td style="color: var(--color-text-muted);">{{p.position}}</td>
+              <td style="font-weight: 800; color: var(--color-accent);">{{p.points}}</td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <sc-if value="{{hasActive}}" hint-placeholder-val="{{false}}">
+    <div onClick="{{closeModal}}" style="position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center;">
+      <div onClick="{{stop}}" style="width: 420px; background: var(--color-surface); border-radius: 14px; padding: 24px; box-sizing: border-box; max-height: 70%; overflow: auto;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+          <p style="margin: 0; font-size: 18px; font-weight: 700;">{{active.name}}</p>
+          <a href="#" onClick="{{closeModal}}" aria-label="Close" style="width: 28px; height: 28px; border-radius: 50%; background: var(--color-bg); display: flex; align-items: center; justify-content: center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+          </a>
+        </div>
+        <p style="margin: 0 0 16px; font-size: 13px; color: var(--color-text-muted);">{{active.club}} · {{active.position}}</p>
+        <p style="margin: 0 0 12px; font-size: 15px; font-weight: 700;">Season total: {{active.points}} pts</p>
+        <sc-for list="{{active.stats}}" as="stat" hint-placeholder-count="4">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-top: 1px solid var(--color-border); font-size: 14px;">
+            <span>{{stat.label}}</span>
+            <span style="font-weight: 700;">{{stat.value}}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1060}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { filter: 'All', query: '', active: null };
+  }
+
+  renderVals() {
+    const all = [
+      { name: 'Erling Haaland', club: 'Man City', position: 'FWD', points: 142, stats: [{ label: 'Minutes', value: 1980 }, { label: 'Goals', value: 24 }, { label: 'Assists', value: 5 }, { label: 'Bonus', value: 18 }] },
+      { name: 'Mohamed Salah', club: 'Liverpool', position: 'FWD', points: 138, stats: [{ label: 'Minutes', value: 2070 }, { label: 'Goals', value: 19 }, { label: 'Assists', value: 12 }, { label: 'Bonus', value: 20 }] },
+      { name: 'Cole Palmer', club: 'Chelsea', position: 'MID', points: 133, stats: [{ label: 'Minutes', value: 2250 }, { label: 'Goals', value: 15 }, { label: 'Assists', value: 10 }, { label: 'Bonus', value: 19 }] },
+      { name: 'Bukayo Saka', club: 'Arsenal', position: 'MID', points: 121, stats: [{ label: 'Minutes', value: 2160 }, { label: 'Goals', value: 11 }, { label: 'Assists', value: 9 }, { label: 'Bonus', value: 14 }] },
+      { name: 'Kevin De Bruyne', club: 'Man City', position: 'MID', points: 115, stats: [{ label: 'Minutes', value: 1890 }, { label: 'Goals', value: 6 }, { label: 'Assists', value: 14 }, { label: 'Bonus', value: 16 }] },
+      { name: 'Alisson', club: 'Liverpool', position: 'GKP', points: 112, stats: [{ label: 'Minutes', value: 2340 }, { label: 'Saves', value: 78 }, { label: 'Clean sheets', value: 14 }, { label: 'Bonus', value: 9 }] },
+      { name: 'Alexander Isak', club: 'Newcastle', position: 'FWD', points: 109, stats: [{ label: 'Minutes', value: 2070 }, { label: 'Goals', value: 16 }, { label: 'Assists', value: 4 }, { label: 'Bonus', value: 11 }] },
+      { name: 'Trent Alexander-Arnold', club: 'Liverpool', position: 'DEF', points: 102, stats: [{ label: 'Minutes', value: 2250 }, { label: 'Assists', value: 8 }, { label: 'Clean sheets', value: 14 }, { label: 'Bonus', value: 12 }] },
+      { name: 'Virgil van Dijk', club: 'Liverpool', position: 'DEF', points: 98, stats: [{ label: 'Minutes', value: 2340 }, { label: 'Goals', value: 2 }, { label: 'Clean sheets', value: 14 }, { label: 'Bonus', value: 10 }] },
+      { name: 'Nick Pope', club: 'Newcastle', position: 'GKP', points: 96, stats: [{ label: 'Minutes', value: 2340 }, { label: 'Saves', value: 92 }, { label: 'Clean sheets', value: 11 }, { label: 'Bonus', value: 6 }] },
+      { name: 'William Saliba', club: 'Arsenal', position: 'DEF', points: 95, stats: [{ label: 'Minutes', value: 2430 }, { label: 'Goals', value: 2 }, { label: 'Clean sheets', value: 13 }, { label: 'Bonus', value: 8 }] },
+      { name: 'Declan Rice', club: 'Arsenal', position: 'MID', points: 88, stats: [{ label: 'Minutes', value: 2250 }, { label: 'Goals', value: 3 }, { label: 'Assists', value: 6 }, { label: 'Bonus', value: 9 }] }
+    ];
+
+    const q = (this.state.query || '').toLowerCase();
+    const filtered = all
+      .filter((p) => this.state.filter === 'All' || p.position === this.state.filter)
+      .filter((p) => p.name.toLowerCase().includes(q))
+      .map((p) => ({ ...p, pick: () => this.setState({ active: p }) }));
+
+    const positions = ['All', 'GKP', 'DEF', 'MID', 'FWD'];
+    const filters = positions.map((label) => {
+      const isActive = this.state.filter === label;
+      return {
+        label,
+        pick: () => this.setState({ filter: label }),
+        bg: isActive ? '#7c3aed' : 'transparent',
+        color: isActive ? '#ffffff' : '#c9c4de',
+        border: isActive ? '#7c3aed' : '#322b52'
+      };
+    });
+
+    const active = this.state.active;
+
+    return {
+      players: filtered,
+      filters,
+      onSearch: (e) => this.setState({ query: e.target.value }),
+      hasActive: !!active,
+      active: active || { name: '', club: '', position: '', points: 0, stats: [] },
+      closeModal: () => this.setState({ active: null }),
+      stop: (e) => e.stopPropagation()
+    };
+  }
+}
+</script>
+</body>
+</html>

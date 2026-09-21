@@ -1,40 +1,62 @@
-### Project Overview
-The fpl-ultimate-frontend repository is the frontend component of fplultimate.com. It enables users to draft players from the Premier League, manage their fantasy teams, and compete head-to-head for points each week.
+# Site flow mockups
 
-### Deployment
-The application is deployed to GitHub Pages, mirroring the API's stage/prod pattern:
-- **Prod**: publish a GitHub Release → deploys at `fplultimate.com` (`www.fplultimate.com`
-  redirects into it), pointed at the prod API.
-- **Stage**: `Actions → Deploy Pages (Stage) → Run workflow` → prompts for a branch →
-  deploys at `fplultimate.com/stage/`, pointed at the stage API.
+Design mockups for the full FPL Ultimate site flow — auth, league table, my team
+(head-to-head points), and player search — each in a mobile and a desktop
+version. These are reference/planning material, not application code: nothing
+here is wired into the React app in `fpl-ultimate/`.
 
-GitHub Pages only supports one live site per repo, so stage can't get its own domain
-the way the API's Lambda functions did — both environments share the same domain/cert,
-with stage living at a subpath. Every deploy rebuilds BOTH environments into one combined
-artifact (see the workflow files for why), so a prod release won't wipe out an in-progress
-stage deploy, and vice versa.
+**Live, interactive version:** https://claude.ai/artifact/YJWi9asJFskVR6gqZ39FMG
+(open this to click through the flow, view both breakpoints side by side on
+one canvas, and leave comments). The files in this folder are the same
+content, kept here as a durable snapshot so a Claude session working in this
+repo (with no access to claude.ai) can still read the current design intent
+and layout by opening the `.dc.html` files directly.
 
-There's an older, currently-unused `deploy-frontend.yml` workflow (manual-dispatch only)
-from an earlier plan to SSH/SFTP a build to a self-hosted Raspberry Pi — left in place but
-superseded by the GitHub Pages workflow above.
+## Screens
 
-### GitHub Issues
-All project tasks and to-dos are tracked via GitHub Issues, located in the fpl-ultimate-api repository for simplicity.
+| Screen | Mobile | Desktop |
+|---|---|---|
+| Log in | `Main.dc.html` | `LoginDesktop.dc.html` |
+| Sign up | `SignupMobile.dc.html` | `SignupDesktop.dc.html` |
+| League table (standings + current matchups) | `LeagueTableMobile.dc.html` | `LeagueTableDesktop.dc.html` |
+| My team (head-to-head gameweek points) | `MyTeamMobile.dc.html` | `MyTeamDesktop.dc.html` |
+| Players (search + stats) | `PlayersMobile.dc.html` | `PlayersDesktop.dc.html` |
 
----
+`canvas.json` records each artboard's position/size on the design canvas and
+is only meaningful together with the live version above — it's not consumed
+by anything in this repo.
 
-### Claude Code Setup
+## Format note
 
-This repo uses a `CLAUDE.md` file to provide AI context when working with Claude Code. The parent directory (`fpl-ultimate/`) contains a top-level `CLAUDE.md` that imports both this file and the API's `CLAUDE.md`, so Claude has full project context when activated from the parent.
+Each `.dc.html` file is a self-contained "Design Component" — HTML/CSS plus a
+small class-based JS component (`class Component extends DCLogic`) that the
+claude.ai artifact runtime renders. They **will not render correctly if
+opened directly in a browser** (they depend on a `support.js` runtime the
+artifact host injects) — read them as source for their markup, styling and
+data shape, not as a working preview. For a working preview, use the live
+link above.
 
-To replicate this for a new developer:
+## Design decisions baked into these mockups
 
-1. Clone both repos (`fpl-ultimate-api` and `fpl-ultimate-frontend`) into a shared parent directory
-2. Create a `CLAUDE.md` in the parent directory with the following content:
+- **Palette:** dark theme, purple/blue/green accents (inspired by
+  premierleague.com), not the current app's green/gold. Purple = primary
+  buttons/brand; blue = nav active states/links; green = points, live
+  badges, and "your team" highlighting. See any file's `:root` CSS variables
+  for exact values.
+- **Auth:** account fields are first name, last name, email, password —
+  deliberately no team name, since a user account is separate from any
+  league team (a person can belong to more than one league/team).
+- **My Team:** rosters are shown as one merged, row-aligned comparison table
+  (your player vs. their player per roster slot) rather than two stacked
+  lists, so gameweek points can be compared directly — closer to how
+  mainstream fantasy sports apps show a head-to-head matchup.
+- **Standings:** W/L/D is shown as a single hyphenated field (e.g. `4-1-0`),
+  not separate columns or letter-suffixed numbers.
+- **Matchup cards:** single horizontal line (`Team A  score - score  Team B`)
+  rather than two stacked team/score rows.
 
-```markdown
-@import fpl-ultimate-api/CLAUDE.md
-@import fpl-ultimate-frontend/CLAUDE.md
-```
+## Status
 
-The sub-repo `CLAUDE.md` files are tracked in version control. The parent-level file is local only.
+Short-term scope only (read-only views matching the current
+`fpl-ultimate-api` + Lambda scraper). Team management, drafting, and write
+operations are long-term and not mocked here yet.

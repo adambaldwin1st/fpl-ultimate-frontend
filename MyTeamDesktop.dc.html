@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>My Team — Desktop</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+:root{--color-primary:#7c3aed;--color-primary-light:#a78bfa;--color-primary-dark:#4c1d95;--color-accent:#22c55e;--color-blue:#3b82f6;--color-bg:#0f0c1a;--color-surface:#1a1530;--color-surface-alt:#221c3d;--color-text:#f5f4fa;--color-text-muted:#9691b8;--color-border:#322b52;}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:var(--color-bg);color:var(--color-text);}
+a{color:inherit;text-decoration:none;}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1120px; box-sizing: border-box; background: var(--color-bg); position: relative;">
+
+  <div style="height: 64px; background: linear-gradient(90deg, #4c1d95 0%, #1e3a8a 100%); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; box-sizing: border-box;">
+    <div style="display: flex; align-items: center; gap: 40px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center;">
+          <span style="color: var(--color-accent); font-weight: 800; font-size: 13px;">FU</span>
+        </div>
+        <span style="color: #fff; font-weight: 700; font-size: 16px;">FPL Ultimate</span>
+      </div>
+      <div style="display: flex; gap: 4px;">
+        <a href="LeagueTableDesktop.dc.html" style="color: rgba(255,255,255,0.75); font-weight: 600; font-size: 14px; padding: 10px 14px; border-bottom: 2px solid transparent;">League Table</a>
+        <a href="MyTeamDesktop.dc.html" style="color: #fff; font-weight: 700; font-size: 14px; padding: 10px 14px; border-bottom: 2px solid var(--color-blue);">My Team</a>
+        <a href="PlayersDesktop.dc.html" style="color: rgba(255,255,255,0.75); font-weight: 600; font-size: 14px; padding: 10px 14px; border-bottom: 2px solid transparent;">Players</a>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <div style="width: 30px; height: 30px; border-radius: 50%; background: var(--color-blue); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff;">AB</div>
+      <span style="color: #fff; font-size: 14px; font-weight: 600;">Adam</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+    </div>
+  </div>
+
+  <div style="max-width: 1100px; margin: 0 auto; padding: 36px 24px 60px;">
+
+    <div style="display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 24px;">
+      <a href="#" aria-label="Previous matchup" style="width: 34px; height: 34px; border-radius: 8px; background: var(--color-surface); border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: center;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+      </a>
+      <span style="font-size: 13px; font-weight: 700; color: var(--color-text-muted);">Gameweek 5</span>
+      <a href="#" aria-label="Next matchup" style="width: 34px; height: 34px; border-radius: 8px; background: var(--color-surface); border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: center;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+      </a>
+    </div>
+
+    <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 28px; margin-bottom: 28px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+      <div style="display: flex; align-items: center; justify-content: center; gap: 64px;">
+        <div style="text-align: center;">
+          <p style="margin: 0 0 4px; font-size: 17px; font-weight: 700; color: var(--color-accent);">Baldwin's Ballers</p>
+          <p style="margin: 0 0 10px; font-size: 13px; color: var(--color-text-muted);">Adam B.</p>
+          <p style="margin: 0; font-size: 44px; font-weight: 800;">68</p>
+        </div>
+        <span style="font-size: 15px; color: var(--color-text-muted);">vs</span>
+        <div style="text-align: center;">
+          <p style="margin: 0 0 4px; font-size: 17px; font-weight: 700;">Wenger's Wizards</p>
+          <p style="margin: 0 0 10px; font-size: 13px; color: var(--color-text-muted);">Chris M.</p>
+          <p style="margin: 0; font-size: 44px; font-weight: 800;">54</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: center;">
+      <div style="width: 680px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 10px; overflow: hidden;">
+        <div style="display: flex; align-items: center; padding: 14px 20px; border-bottom: 1px solid var(--color-border);">
+          <span style="flex: 1; min-width: 0; text-align: right; font-size: 13px; font-weight: 700; color: var(--color-accent); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Baldwin's Ballers</span>
+          <span style="width: 40px;"></span>
+          <span style="width: 1px;"></span>
+          <span style="width: 40px;"></span>
+          <span style="flex: 1; min-width: 0; text-align: left; font-size: 13px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Wenger's Wizards</span>
+        </div>
+        <sc-for list="{{pairedRows}}" as="row" hint-placeholder-count="20">
+          <sc-if value="{{row.isHeading}}" hint-placeholder-val="{{false}}">
+            <p style="margin: 0; font-size: 11px; font-weight: 700; color: var(--color-text-muted); padding: 10px 0 4px; border-top: 1px solid var(--color-border); text-align: center; text-transform: uppercase; letter-spacing: 0.04em;">{{row.headingText}}</p>
+          </sc-if>
+          <sc-if value="{{row.isPlayer}}" hint-placeholder-val="{{true}}">
+            <div style="display: flex; align-items: center; gap: 8px; padding: 8px 20px;">
+              <span onClick="{{row.homePick}}" style="flex: 1; min-width: 0; text-align: right; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer;">{{row.homeName}}</span>
+              <span onClick="{{row.homePick}}" style="width: 40px; text-align: center; font-size: 14px; font-weight: 800; color: {{row.homeColor}}; cursor: pointer;">{{row.homeBadge}}</span>
+              <span style="width: 1px; height: 18px; background: var(--color-border);"></span>
+              <span onClick="{{row.awayPick}}" style="width: 40px; text-align: center; font-size: 14px; font-weight: 800; color: {{row.awayColor}}; cursor: pointer;">{{row.awayBadge}}</span>
+              <span onClick="{{row.awayPick}}" style="flex: 1; min-width: 0; text-align: left; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer;">{{row.awayName}}</span>
+            </div>
+          </sc-if>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <sc-if value="{{hasActive}}" hint-placeholder-val="{{false}}">
+    <div onClick="{{closeModal}}" style="position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center;">
+      <div onClick="{{stop}}" style="width: 420px; background: var(--color-surface); border-radius: 14px; padding: 24px; box-sizing: border-box; max-height: 70%; overflow: auto;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+          <p style="margin: 0; font-size: 18px; font-weight: 700;">{{active.name}}</p>
+          <a href="#" onClick="{{closeModal}}" aria-label="Close" style="width: 28px; height: 28px; border-radius: 50%; background: var(--color-bg); display: flex; align-items: center; justify-content: center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+          </a>
+        </div>
+        <sc-if value="{{active.started}}" hint-placeholder-val="{{true}}">
+          <p style="margin: 0 0 12px; font-size: 15px; font-weight: 700;">Total: {{active.points}} pts</p>
+          <sc-for list="{{active.breakdown}}" as="stat" hint-placeholder-count="3">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-top: 1px solid var(--color-border); font-size: 14px;">
+              <span>{{stat.name}} ({{stat.value}})</span>
+              <span style="font-weight: 700;">{{stat.pointsLabel}}</span>
+            </div>
+          </sc-for>
+        </sc-if>
+        <sc-if value="{{active.notStarted}}" hint-placeholder-val="{{false}}">
+          <p style="margin: 0; font-size: 14px; color: var(--color-text-muted);">Hasn't played yet — faces {{active.opponent}} ({{active.venue}}).</p>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1120}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { active: null };
+  }
+
+  toActive(p) {
+    return {
+      name: p.name,
+      started: p.started,
+      notStarted: !p.started,
+      points: p.points,
+      opponent: p.opponent,
+      venue: p.isHome ? 'H' : 'A',
+      breakdown: (p.breakdown || []).map((s) => ({ ...s, pointsLabel: (s.points > 0 ? '+' : '') + s.points }))
+    };
+  }
+
+  buildPairedRows(ownList, oppList) {
+    const rows = [];
+    let lastPos = null;
+    let benchShown = false;
+    const len = Math.max(ownList.length, oppList.length);
+    for (let i = 0; i < len; i++) {
+      const o = ownList[i];
+      const p = oppList[i];
+      const ref = o || p;
+      if (ref.isStarter && ref.positionType !== lastPos) {
+        rows.push({ isHeading: true, isPlayer: false, headingText: ref.positionType });
+        lastPos = ref.positionType;
+      }
+      if (!ref.isStarter && !benchShown) {
+        rows.push({ isHeading: true, isPlayer: false, headingText: 'Bench' });
+        benchShown = true;
+      }
+      rows.push({
+        isHeading: false,
+        isPlayer: true,
+        pos: ref.positionType,
+        homeName: o.name,
+        homeBadge: o.started ? String(o.points) : '–',
+        homeColor: o.started ? '#22c55e' : '#9691b8',
+        homePick: () => this.setState({ active: this.toActive(o) }),
+        awayName: p.name,
+        awayBadge: p.started ? String(p.points) : '–',
+        awayColor: p.started ? '#22c55e' : '#9691b8',
+        awayPick: () => this.setState({ active: this.toActive(p) })
+      });
+    }
+    return rows;
+  }
+
+  renderVals() {
+    const own = [
+      { name: 'Alisson', positionType: 'GKP', isStarter: true, started: true, points: 4, breakdown: [{ name: 'Minutes played', value: 90, points: 2 }, { name: 'Saves', value: 4, points: 2 }] },
+      { name: 'Trent Alexander-Arnold', positionType: 'DEF', isStarter: true, started: true, points: 6, breakdown: [{ name: 'Minutes played', value: 90, points: 2 }, { name: 'Assists', value: 1, points: 3 }, { name: 'Bonus', value: 1, points: 1 }] },
+      { name: 'Virgil van Dijk', positionType: 'DEF', isStarter: true, started: true, points: 5, breakdown: [{ name: 'Minutes played', value: 90, points: 2 }, { name: 'Clean sheet', value: 1, points: 4 }, { name: 'Yellow card', value: 1, points: -1 }] },
+      { name: 'Reece James', positionType: 'DEF', isStarter: true, started: true, points: 3, breakdown: [{ name: 'Minutes played', value: 90, points: 2 }, { name: 'Bonus', value: 1, points: 1 }] },
+      { name: 'Bukayo Saka', positionType: 'MID', isStarter: true, started: true, points: 8, breakdown: [{ name: 'Minutes played', value: 90, points: 2 }, { name: 'Goals', value: 1, points: 5 }, { name: 'Bonus', value: 1, points: 1 }] },
+      { name: 'Kevin De Bruyne', positionType: 'MID', isStarter: true, started: true, points: 9, breakdown: [{ name: 'Minutes played', value: 90, points: 2 }, { name: 'Assists', value: 2, points: 6 }, { name: 'Bonus', value: 1, points: 1 }] },
+      { name: 'Bruno Fernandes', positionType: 'MID', isStarter: true, started: true, points: 5, breakdown: [{ name: 'Minutes played', value: 90, points: 2 }, { name: 'Assists', value: 1, points: 3 }] },
+      { name: 'Martin Ødegaard', positionType: 'MID', isStarter: true, started: true, points: 4, breakdown: [{ name: 'Minutes played', value: 90, points: 2 }, { name: 'Assists', value: 1, points: 3 }, { name: 'Yellow card', value: 1, points: -1 }] },
+      { name: 'Erling Haaland', positionType: 'FWD', isStarter: true, started: true, points: 12, breakdown: [{ name: 'Minutes played', value: 90, points: 2 }, { name: 'Goals', value: 2, points: 8 }, { name: 'Bonus', value: 1, points: 2 }] },
+      { name: 'Ollie Watkins', positionType: 'FWD', isStarter: true, started: true, points: 6, breakdown: [{ name: 'Minutes played', value: 90, points: 2 }, { name: 'Goals', value: 1, points: 4 }] },
+      { name: 'Mohamed Salah', positionType: 'FWD', isStarter: true, started: true, points: 6, breakdown: [{ name: 'Minutes played', value: 90, points: 2 }, { name: 'Goals', value: 1, points: 4 }] },
+      { name: 'Jordan Pickford', positionType: 'GKP', isStarter: false, started: false, opponent: 'Fulham', isHome: true },
+      { name: 'Pedro Porro', positionType: 'DEF', isStarter: false, started: false, opponent: 'Wolves', isHome: false },
+      { name: 'Douglas Luiz', positionType: 'MID', isStarter: false, started: false, opponent: 'Brighton', isHome: true },
+      { name: 'Danny Welbeck', positionType: 'FWD', isStarter: false, started: false, opponent: 'Newcastle', isHome: false }
+    ];
+
+    const opp = [
+      { name: 'Ederson', positionType: 'GKP', isStarter: true, started: true, points: 3, breakdown: [{ name: 'Minutes played', value: 90, points: 2 }, { name: 'Goals conceded', value: 2, points: -2 }, { name: 'Saves', value: 3, points: 3 }] },
+      { name: 'Gabriel', positionType: 'DEF', isStarter: true, started: true, points: 4, breakdown: [{ name: 'Minutes played', value: 90, points: 2 }, { name: 'Assists', value: 1, points: 3 }, { name: 'Yellow card', value: 1, points: -1 }] },
+      { name: 'William Saliba', positionType: 'DEF', isStarter: true, started: true, points: 5, breakdown: [{ name: 'Minutes played', value: 90, points: 2 }, { name: 'Assists', value: 1, points: 3 }] },
+      { name: 'Kieran Trippier', positionType: 'DEF', isStarter: true, started: true, points: 2, breakdown: [{ name: 'Minutes played', value: 90, points: 2 }] },
+      { name: 'Declan Rice', positionType: 'MID', isStarter: true, started: true, points: 6, breakdown: [{ name: 'Minutes played', value: 90, points: 2 }, { name: 'Assists', value: 1, points: 3 }, { name: 'Bonus', value: 1, points: 1 }] },
+      { name: 'James Maddison', positionType: 'MID', isStarter: true, started: true, points: 7, breakdown: [{ name: 'Minutes played', value: 90, points: 2 }, { name: 'Goals', value: 1, points: 5 }] },
+      { name: 'Cole Palmer', positionType: 'MID', isStarter: true, started: true, points: 8, breakdown: [{ name: 'Minutes played', value: 90, points: 2 }, { name: 'Goals', value: 1, points: 5 }, { name: 'Yellow card', value: 1, points: -1 }, { name: 'Bonus', value: 2, points: 2 }] },
+      { name: 'Morgan Rogers', positionType: 'MID', isStarter: true, started: true, points: 3, breakdown: [{ name: 'Minutes played', value: 90, points: 2 }, { name: 'Bonus', value: 1, points: 1 }] },
+      { name: 'Alexander Isak', positionType: 'FWD', isStarter: true, started: true, points: 9, breakdown: [{ name: 'Minutes played', value: 90, points: 2 }, { name: 'Goals', value: 1, points: 4 }, { name: 'Bonus', value: 3, points: 3 }] },
+      { name: 'Dominic Solanke', positionType: 'FWD', isStarter: true, started: true, points: 4, breakdown: [{ name: 'Minutes played', value: 90, points: 2 }, { name: 'Bonus', value: 2, points: 2 }] },
+      { name: 'Nicolas Jackson', positionType: 'FWD', isStarter: true, started: true, points: 3, breakdown: [{ name: 'Minutes played', value: 90, points: 2 }, { name: 'Yellow card', value: 1, points: -1 }, { name: 'Bonus', value: 2, points: 2 }] },
+      { name: 'Robert Sánchez', positionType: 'GKP', isStarter: false, started: false, opponent: 'Spurs', isHome: false },
+      { name: 'Ben White', positionType: 'DEF', isStarter: false, started: false, opponent: 'Villa', isHome: true },
+      { name: 'Conor Gallagher', positionType: 'MID', isStarter: false, started: false, opponent: 'Forest', isHome: false },
+      { name: 'Chris Wood', positionType: 'FWD', isStarter: false, started: false, opponent: 'Leicester', isHome: true }
+    ];
+
+    const active = this.state.active;
+
+    return {
+      pairedRows: this.buildPairedRows(own, opp),
+      hasActive: !!active,
+      active: active || { name: '', started: false, notStarted: false, points: 0, breakdown: [], opponent: '', venue: '' },
+      closeModal: () => this.setState({ active: null }),
+      stop: (e) => e.stopPropagation()
+    };
+  }
+}
+</script>
+</body>
+</html>
