@@ -14,33 +14,33 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ player, onClose }) => {
     return (
         <div className="modal is-active">
             <div className="modal-background" onClick={onClose}></div>
-            <div className="modal-card">
-                <header className="modal-card-head">
+            <div className="modal-card" style={{ borderRadius: '14px', overflow: 'hidden' }}>
+                <header className="modal-card-head" style={{ borderBottom: '1px solid var(--color-border)' }}>
                     <p className="modal-card-title">{player.name}</p>
                     <button className="delete" aria-label="close" onClick={onClose}></button>
                 </header>
                 <section className="modal-card-body">
                     {player.started ? (
                         <>
-                            <p className="mb-4">
-                                <strong>Total: {player.points} pts</strong>
+                            <p className="mb-4" style={{ fontSize: '15px', fontWeight: 700 }}>
+                                Total: {player.points} pts
                             </p>
                             {player.breakdown.length > 0 ? (
-                                <table className="table is-fullwidth">
-                                    <tbody>
-                                        {player.breakdown.map((stat, i) => (
-                                            <tr key={i}>
-                                                <td>
-                                                    {stat.name} ({stat.value})
-                                                </td>
-                                                <td className="has-text-right">
-                                                    {stat.points > 0 ? '+' : ''}
-                                                    {stat.points}
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
+                                player.breakdown.map((stat, i) => (
+                                    <div
+                                        key={i}
+                                        className="is-flex is-align-items-center is-justify-content-space-between"
+                                        style={{ padding: '8px 0', borderTop: '1px solid var(--color-border)', fontSize: '14px' }}
+                                    >
+                                        <span>
+                                            {stat.name} ({stat.value})
+                                        </span>
+                                        <span style={{ fontWeight: 700 }}>
+                                            {stat.points > 0 ? '+' : ''}
+                                            {stat.points}
+                                        </span>
+                                    </div>
+                                ))
                             ) : (
                                 <p style={{ color: 'var(--color-text-muted)' }}>No scoring stats recorded.</p>
                             )}

@@ -1,12 +1,15 @@
 :root {
-  --color-primary: #146c43;
-  --color-primary-dark: #0f5233;
-  --color-accent: #d4a017;
-  --color-bg: #f7f8f5;
-  --color-surface: #ffffff;
-  --color-text: #1a1a1a;
-  --color-text-muted: #6b7280;
-  --color-border: #e5e7eb;
+  --color-primary: #7c3aed;
+  --color-primary-light: #a78bfa;
+  --color-primary-dark: #4c1d95;
+  --color-accent: #22c55e;
+  --color-blue: #3b82f6;
+  --color-bg: #0f0c1a;
+  --color-surface: #1a1530;
+  --color-surface-alt: #221c3d;
+  --color-text: #f5f4fa;
+  --color-text-muted: #9691b8;
+  --color-border: #322b52;
 }
 
 body {
@@ -37,9 +40,74 @@ code {
 }
 
 .own-team-row {
-  background-color: rgba(20, 108, 67, 0.08);
+  background-color: rgba(34, 197, 94, 0.12);
 }
 
 .own-team-row td:first-child {
-  border-left: 3px solid var(--color-primary);
+  border-left: 3px solid var(--color-accent);
+}
+
+.section-label {
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.icon-button {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text);
+}
+
+.icon-button[disabled] {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.table {
+  background-color: transparent;
+  color: var(--color-text);
+}
+
+.table td,
+.table th {
+  background-color: transparent;
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.table th {
+  color: var(--color-text-muted);
+}
+
+.table.is-striped tbody tr:not(.own-team-row):nth-child(even) {
+  background-color: var(--color-surface-alt);
+}
+
+.select select,
+.button {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.modal-card-head,
+.modal-card-body,
+.modal-card-foot {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.modal-card-title {
+  color: var(--color-text);
 }

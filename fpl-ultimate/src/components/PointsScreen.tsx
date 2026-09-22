@@ -4,7 +4,7 @@ import { Matchup } from '../types/league';
 import { GameweekPointsResponse, PlayerGameweekPoint } from '../types/gameweekPoints';
 import { MY_TEAM_NAME } from '../config';
 import { getStoredTeam, setStoredTeam } from '../storage';
-import TeamRoster from './TeamRoster';
+import MatchupRoster from './MatchupRoster';
 import PlayerModal from './PlayerModal';
 
 const PointsScreen: React.FC = () => {
@@ -45,11 +45,14 @@ const PointsScreen: React.FC = () => {
 
     return (
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '1.5rem' }}>
-            <div className="is-flex is-justify-content-space-between is-align-items-center mb-4">
-                <button className="button is-white" onClick={() => goToMatchup(-1)} disabled={matchupsLoading} aria-label="Previous matchup">
-                    <span className="icon">
-                        <i className="fas fa-chevron-left"></i>
-                    </span>
+            <div className="is-flex is-align-items-center is-justify-content-center" style={{ gap: '16px', marginBottom: '24px' }}>
+                <button
+                    className="icon-button"
+                    onClick={() => goToMatchup(-1)}
+                    disabled={matchupsLoading}
+                    aria-label="Previous matchup"
+                >
+                    <i className="fas fa-chevron-left"></i>
                 </button>
 
                 <div className="select">
@@ -62,10 +65,13 @@ const PointsScreen: React.FC = () => {
                     </select>
                 </div>
 
-                <button className="button is-white" onClick={() => goToMatchup(1)} disabled={matchupsLoading} aria-label="Next matchup">
-                    <span className="icon">
-                        <i className="fas fa-chevron-right"></i>
-                    </span>
+                <button
+                    className="icon-button"
+                    onClick={() => goToMatchup(1)}
+                    disabled={matchupsLoading}
+                    aria-label="Next matchup"
+                >
+                    <i className="fas fa-chevron-right"></i>
                 </button>
             </div>
 
@@ -74,41 +80,36 @@ const PointsScreen: React.FC = () => {
 
             {points && (
                 <>
-                    <div className="card-surface p-5 mb-5">
+                    <div className="card-surface" style={{ padding: '28px', marginBottom: '28px' }}>
                         <p className="has-text-centered has-text-weight-semibold mb-4" style={{ color: 'var(--color-text-muted)' }}>
                             Gameweek {points.gameweek}
                         </p>
-                        <div className="columns is-mobile is-vcentered">
-                            <div className="column has-text-centered">
-                                <p className="title is-5 has-text-primary mb-1">{points.selectedTeam.teamName}</p>
-                                <p className="is-size-7 mb-2" style={{ color: 'var(--color-text-muted)' }}>
+                        <div className="is-flex is-align-items-center is-justify-content-center">
+                            <div className="has-text-centered" style={{ flex: 1 }}>
+                                <p style={{ margin: '0 0 4px', fontSize: '17px', fontWeight: 700, color: 'var(--color-accent)' }}>
+                                    {points.selectedTeam.teamName}
+                                </p>
+                                <p style={{ margin: '0 0 10px', fontSize: '13px', color: 'var(--color-text-muted)' }}>
                                     {points.selectedTeam.managerName}
                                 </p>
-                                <p className="title is-2">{points.selectedTeam.totalPoints}</p>
+                                <p style={{ margin: 0, fontSize: '44px', fontWeight: 800 }}>{points.selectedTeam.totalPoints}</p>
                             </div>
-                            <div className="column is-narrow has-text-centered">
-                                <p className="subtitle is-6" style={{ color: 'var(--color-text-muted)' }}>
-                                    vs
-                                </p>
-                            </div>
-                            <div className="column has-text-centered">
-                                <p className="title is-5 mb-1">{points.opponentTeam.teamName}</p>
-                                <p className="is-size-7 mb-2" style={{ color: 'var(--color-text-muted)' }}>
+                            <span style={{ fontSize: '15px', color: 'var(--color-text-muted)', padding: '0 16px', flexShrink: 0 }}>vs</span>
+                            <div className="has-text-centered" style={{ flex: 1 }}>
+                                <p style={{ margin: '0 0 4px', fontSize: '17px', fontWeight: 700 }}>{points.opponentTeam.teamName}</p>
+                                <p style={{ margin: '0 0 10px', fontSize: '13px', color: 'var(--color-text-muted)' }}>
                                     {points.opponentTeam.managerName}
                                 </p>
-                                <p className="title is-2">{points.opponentTeam.totalPoints}</p>
+                                <p style={{ margin: 0, fontSize: '44px', fontWeight: 800 }}>{points.opponentTeam.totalPoints}</p>
                             </div>
                         </div>
                     </div>
 
-                    <div className="columns">
-                        <div className="column">
-                            <TeamRoster team={points.selectedTeam} onSelectPlayer={setActivePlayer} />
-                        </div>
-                        <div className="column">
-                            <TeamRoster team={points.opponentTeam} onSelectPlayer={setActivePlayer} />
-                        </div>
-                    </div>
+                    <MatchupRoster
+                        selectedTeam={points.selectedTeam}
+                        opponentTeam={points.opponentTeam}
+                        onSelectPlayer={setActivePlayer}
+                    />
                 </>
             )}
 
