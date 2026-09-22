@@ -9,6 +9,10 @@ The active application is in `fpl-ultimate/` — React + TypeScript, actively de
 directory in this repo; an earlier `fpl-ultimate-react/` scaffold existed briefly and
 was deleted for being an unused duplicate.
 
+League Table and My Team are built and live, restyled to the dark purple/blue/green
+theme in the root-level `*.dc.html` mockups (see this repo's root `README.md`).
+Players, Login, and Signup are mockups only — not yet built.
+
 ## Tech Stack
 
 - **React 18** + **TypeScript** (Create React App)
@@ -57,8 +61,21 @@ fpl-ultimate/
 
 **Long-term:** Full standalone FPL platform UI with custom scoring, team management, and write operations.
 
+## Theming
+
+Dark purple/blue/green palette, defined as CSS variables in `src/index.css` (`--color-bg`,
+`--color-surface`, `--color-accent`, etc.) — matches the root-level `*.dc.html` mockups.
+
+**Import order matters and is easy to get backwards:** `bulma/css/bulma.min.css` must be
+imported in `index.tsx` *before* `./index.css`. Bulma ships same-specificity rules for
+`.table`, `.button`, `.select select`, and `.modal-card-*` that silently override the theme
+if Bulma's CSS lands later in the bundle — it did once, and every table/button/select/modal
+rendered in Bulma's default light colors instead of the theme until the import order was
+fixed. Don't move the Bulma import into `App.tsx` or any component file.
+
 ## Conventions
 
 - Functional components throughout
 - Standard TypeScript and React conventions — no unusual patterns
-- Bulma for styling — use Bulma classes before reaching for custom CSS
+- Bulma for structural classes (`is-flex`, `columns`, modal markup, etc.); colors and
+  surfaces come from the theme's CSS variables, not Bulma's default palette

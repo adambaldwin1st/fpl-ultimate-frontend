@@ -60,3 +60,8 @@ link above.
 Short-term scope only (read-only views matching the current
 `fpl-ultimate-api` + Lambda scraper). Team management, drafting, and write
 operations are long-term and not mocked here yet.
+
+**Built and live in `fpl-ultimate/`:** League table and My Team (head-to-head
+points), restyled to match these mockups' dark theme — see that app's
+`index.css` for the palette. **Not yet built:** Players, Login, Signup — these
+mockups are still just design reference for those three.
