@@ -146,10 +146,13 @@ const PointsScreen: React.FC = () => {
                         )}
                     </div>
 
-                    {/* Mobile: pitch view only, no list view and no toggle. */}
+                    {/* Mobile: list view only, no pitch view and no toggle. */}
                     <div className="is-hidden-tablet">
-                        <PitchRoster team={points.selectedTeam} onSelectPlayer={setActivePlayer} />
-                        <PitchRoster team={points.opponentTeam} onSelectPlayer={setActivePlayer} />
+                        <MatchupRoster
+                            selectedTeam={points.selectedTeam}
+                            opponentTeam={points.opponentTeam}
+                            onSelectPlayer={setActivePlayer}
+                        />
                     </div>
                 </>
             )}
