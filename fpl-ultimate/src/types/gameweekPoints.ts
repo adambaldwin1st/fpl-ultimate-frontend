@@ -6,6 +6,7 @@ export interface StatBreakdown {
 
 export interface PlayerGameweekPoint {
     name: string;
+    club: string;
     positionType: 'GKP' | 'DEF' | 'MID' | 'FWD' | 'UNK';
     squadPosition: number;
     isStarter: boolean;

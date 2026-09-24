@@ -5,12 +5,16 @@ import { GameweekPointsResponse, PlayerGameweekPoint } from '../types/gameweekPo
 import { MY_TEAM_NAME } from '../config';
 import { getStoredTeam, setStoredTeam } from '../storage';
 import MatchupRoster from './MatchupRoster';
+import PitchRoster from './PitchRoster';
 import PlayerModal from './PlayerModal';
+
+type ViewMode = 'list' | 'pitch';
 
 const PointsScreen: React.FC = () => {
     const { data: matchups, loading: matchupsLoading } = useApiData<Matchup[]>('/league/current-matchups', []);
     const [selectedTeam, setSelectedTeam] = useState<string>(() => getStoredTeam() || MY_TEAM_NAME);
     const [activePlayer, setActivePlayer] = useState<PlayerGameweekPoint | null>(null);
+    const [viewMode, setViewMode] = useState<ViewMode>('list');
 
     const teamNames = useMemo(() => {
         const names = new Set<string>();
@@ -105,11 +109,39 @@ const PointsScreen: React.FC = () => {
                         </div>
                     </div>
 
-                    <MatchupRoster
-                        selectedTeam={points.selectedTeam}
-                        opponentTeam={points.opponentTeam}
-                        onSelectPlayer={setActivePlayer}
-                    />
+                    <div className="is-flex is-justify-content-center" style={{ gap: '8px', marginBottom: '20px' }}>
+                        {(['list', 'pitch'] as ViewMode[]).map((mode) => (
+                            <button
+                                key={mode}
+                                onClick={() => setViewMode(mode)}
+                                style={{
+                                    fontSize: '13px',
+                                    fontWeight: 700,
+                                    padding: '8px 18px',
+                                    borderRadius: '20px',
+                                    background: viewMode === mode ? 'var(--color-primary)' : 'transparent',
+                                    color: viewMode === mode ? '#ffffff' : 'var(--color-text-muted)',
+                                    border: `1px solid ${viewMode === mode ? 'var(--color-primary)' : 'var(--color-border)'}`,
+                                    cursor: 'pointer',
+                                }}
+                            >
+                                {mode === 'list' ? 'List View' : 'Pitch View'}
+                            </button>
+                        ))}
+                    </div>
+
+                    {viewMode === 'list' ? (
+                        <MatchupRoster
+                            selectedTeam={points.selectedTeam}
+                            opponentTeam={points.opponentTeam}
+                            onSelectPlayer={setActivePlayer}
+                        />
+                    ) : (
+                        <>
+                            <PitchRoster team={points.selectedTeam} onSelectPlayer={setActivePlayer} />
+                            <PitchRoster team={points.opponentTeam} onSelectPlayer={setActivePlayer} />
+                        </>
+                    )}
                 </>
             )}
 
