@@ -71,9 +71,10 @@ const PitchMarker: React.FC<{ player: PlayerGameweekPoint; onSelect: () => void 
                     fontSize: '11px',
                     fontWeight: 800,
                     color: player.started ? 'var(--color-accent)' : 'rgba(255,255,255,0.6)',
+                    whiteSpace: 'nowrap',
                 }}
             >
-                {player.started ? player.points : '–'}
+                {player.started ? player.points : `${player.opponent}(${player.isHome ? 'H' : 'A'})`}
             </span>
         </button>
     );
