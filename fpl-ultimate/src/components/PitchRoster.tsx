@@ -37,7 +37,12 @@ const PitchMarker: React.FC<{ player: PlayerGameweekPoint; onSelect: () => void 
                 <img
                     src={crestUrl}
                     alt={player.club}
-                    style={{ width: '38px', height: '38px', filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.35))' }}
+                    style={{
+                        width: '38px',
+                        height: '38px',
+                        objectFit: 'contain',
+                        filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.35))',
+                    }}
                 />
             ) : (
                 <div

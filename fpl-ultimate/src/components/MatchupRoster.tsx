@@ -79,7 +79,11 @@ const RosterPlayerCell: React.FC<{
             }}
         >
             {crestUrl ? (
-                <img src={crestUrl} alt={player.club} style={{ width: '16px', height: '16px', flexShrink: 0 }} />
+                <img
+                    src={crestUrl}
+                    alt={player.club}
+                    style={{ width: '16px', height: '16px', objectFit: 'contain', flexShrink: 0 }}
+                />
             ) : (
                 <span style={{ width: '16px', height: '16px', flexShrink: 0 }} />
             )}
