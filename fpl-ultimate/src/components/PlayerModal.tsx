@@ -47,7 +47,7 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ player, onClose }) => {
                         </>
                     ) : (
                         <p style={{ color: 'var(--color-text-muted)' }}>
-                            Hasn't played yet — faces {player.opponent} {player.isHome ? 'home' : 'away'}.
+                            Hasn't played yet — faces {player.opponent}({player.isHome ? 'H' : 'A'}).
                         </p>
                     )}
                 </section>

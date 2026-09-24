@@ -44,9 +44,14 @@ function buildPairedRows(home: PlayerGameweekPoint[], away: PlayerGameweekPoint[
 const badgeColor = (player?: PlayerGameweekPoint) =>
     player?.started ? 'var(--color-accent)' : 'var(--color-text-muted)';
 
-const badgeText = (player?: PlayerGameweekPoint) => (player?.started ? String(player.points) : '–');
+const badgeText = (player?: PlayerGameweekPoint) => {
+    if (!player) {
+        return '';
+    }
+    return player.started ? String(player.points) : `${player.opponent}(${player.isHome ? 'H' : 'A'})`;
+};
 
-const upcomingFixtureText = (player: PlayerGameweekPoint) => `${player.opponent} ${player.isHome ? 'home' : 'away'}`;
+const badgeFontSize = (player?: PlayerGameweekPoint) => (player?.started ? '14px' : '11px');
 
 const RosterPlayerCell: React.FC<{
     player?: PlayerGameweekPoint;
@@ -67,42 +72,28 @@ const RosterPlayerCell: React.FC<{
                 flex: 1,
                 minWidth: 0,
                 display: 'flex',
-                flexDirection: 'column',
-                alignItems: isRight ? 'flex-end' : 'flex-start',
-                gap: '2px',
+                flexDirection: isRight ? 'row-reverse' : 'row',
+                alignItems: 'center',
+                gap: '6px',
                 cursor: 'pointer',
             }}
         >
-            <div
+            {crestUrl ? (
+                <img src={crestUrl} alt={player.club} style={{ width: '16px', height: '16px', flexShrink: 0 }} />
+            ) : (
+                <span style={{ width: '16px', height: '16px', flexShrink: 0 }} />
+            )}
+            <span
                 style={{
-                    display: 'flex',
-                    flexDirection: isRight ? 'row-reverse' : 'row',
-                    alignItems: 'center',
-                    gap: '6px',
+                    fontSize: '14px',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
                     minWidth: 0,
-                    maxWidth: '100%',
                 }}
             >
-                {crestUrl ? (
-                    <img src={crestUrl} alt={player.club} style={{ width: '16px', height: '16px', flexShrink: 0 }} />
-                ) : (
-                    <span style={{ width: '16px', height: '16px', flexShrink: 0 }} />
-                )}
-                <span
-                    style={{
-                        fontSize: '14px',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        minWidth: 0,
-                    }}
-                >
-                    {player.name}
-                </span>
-            </div>
-            {!player.started && (
-                <span style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>{upcomingFixtureText(player)}</span>
-            )}
+                {player.name}
+            </span>
         </div>
     );
 };
@@ -128,9 +119,9 @@ const MatchupRoster: React.FC<MatchupRosterProps> = ({ selectedTeam, opponentTea
                 >
                     {selectedTeam.teamName}
                 </span>
-                <span style={{ width: '40px' }} />
+                <span style={{ width: '56px' }} />
                 <span style={{ width: '1px' }} />
-                <span style={{ width: '40px' }} />
+                <span style={{ width: '56px' }} />
                 <span
                     style={{
                         flex: 1,
@@ -170,14 +161,32 @@ const MatchupRoster: React.FC<MatchupRosterProps> = ({ selectedTeam, opponentTea
                         <RosterPlayerCell player={row.home} align="right" onSelect={() => row.home && onSelectPlayer(row.home)} />
                         <span
                             onClick={() => row.home && onSelectPlayer(row.home)}
-                            style={{ width: '40px', textAlign: 'center', fontSize: '14px', fontWeight: 800, color: badgeColor(row.home), cursor: 'pointer' }}
+                            style={{
+                                width: '56px',
+                                flexShrink: 0,
+                                textAlign: 'center',
+                                fontSize: badgeFontSize(row.home),
+                                fontWeight: 800,
+                                color: badgeColor(row.home),
+                                cursor: 'pointer',
+                                whiteSpace: 'nowrap',
+                            }}
                         >
                             {badgeText(row.home)}
                         </span>
-                        <span style={{ width: '1px', height: '18px', background: 'var(--color-border)' }} />
+                        <span style={{ width: '1px', height: '18px', background: 'var(--color-border)', flexShrink: 0 }} />
                         <span
                             onClick={() => row.away && onSelectPlayer(row.away)}
-                            style={{ width: '40px', textAlign: 'center', fontSize: '14px', fontWeight: 800, color: badgeColor(row.away), cursor: 'pointer' }}
+                            style={{
+                                width: '56px',
+                                flexShrink: 0,
+                                textAlign: 'center',
+                                fontSize: badgeFontSize(row.away),
+                                fontWeight: 800,
+                                color: badgeColor(row.away),
+                                cursor: 'pointer',
+                                whiteSpace: 'nowrap',
+                            }}
                         >
                             {badgeText(row.away)}
                         </span>
