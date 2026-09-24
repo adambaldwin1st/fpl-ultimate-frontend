@@ -34,9 +34,13 @@ const NavBar: React.FC<NavBarProps> = ({ activeTab, onTabChange }) => {
                     <div className="is-flex is-align-items-center" style={{ gap: '10px' }}>
                         <div
                             className="is-flex is-align-items-center is-justify-content-center"
-                            style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(255,255,255,0.15)' }}
+                            style={{ width: '32px', height: '32px', borderRadius: '8px', background: '#ffffff', padding: '4px', boxSizing: 'border-box' }}
                         >
-                            <span style={{ color: 'var(--color-accent)', fontWeight: 800, fontSize: '13px' }}>FU</span>
+                            <img
+                                src={`${process.env.PUBLIC_URL}/images/PLWhiteOutline.png`}
+                                alt="FPL Ultimate"
+                                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                            />
                         </div>
                         <span style={{ color: '#fff', fontWeight: 700, fontSize: '16px' }}>FPL Ultimate</span>
                     </div>
