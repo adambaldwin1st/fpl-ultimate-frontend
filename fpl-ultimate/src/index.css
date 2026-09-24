@@ -111,3 +111,17 @@ code {
 .modal-card-title {
   color: var(--color-text);
 }
+
+.pitch-side-by-side {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+/* Bulma's desktop breakpoint - side-by-side pitches need real width, not just non-mobile. */
+@media screen and (min-width: 1024px) {
+  .pitch-side-by-side {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}

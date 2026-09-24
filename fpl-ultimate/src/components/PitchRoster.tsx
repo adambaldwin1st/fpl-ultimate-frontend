@@ -9,6 +9,11 @@ interface PitchRosterProps {
 
 const POSITION_ORDER: PlayerGameweekPoint['positionType'][] = ['GKP', 'DEF', 'MID', 'FWD'];
 
+// Same pitch graphic draft.premierleague.com's own Points > Pitch View uses.
+// Hosted on their app's hashed asset bundle, not a stable CDN path - could break
+// on their next deploy, unlike the badge crests (resources.premierleague.com).
+const PITCH_BACKGROUND_URL = 'https://draft.premierleague.com/assets/pitch-default-CfeFC5Ls.svg';
+
 const PitchMarker: React.FC<{ player: PlayerGameweekPoint; onSelect: () => void }> = ({ player, onSelect }) => {
     const crestUrl = getClubCrestUrl(player.club);
 
@@ -93,7 +98,7 @@ const PitchRoster: React.FC<PitchRosterProps> = ({ team, onSelectPlayer }) => {
 
             <div
                 style={{
-                    background: 'linear-gradient(180deg, #1c6b3a 0%, #14522b 100%)',
+                    background: `#14522b url(${PITCH_BACKGROUND_URL}) center / cover no-repeat`,
                     padding: '24px 12px',
                     display: 'flex',
                     flexDirection: 'column',

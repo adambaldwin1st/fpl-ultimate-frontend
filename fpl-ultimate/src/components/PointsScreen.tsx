@@ -109,7 +109,7 @@ const PointsScreen: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className="is-flex is-justify-content-center" style={{ gap: '8px', marginBottom: '20px' }}>
+                    <div className="is-hidden-mobile is-flex is-justify-content-center" style={{ gap: '8px', marginBottom: '20px' }}>
                         {(['list', 'pitch'] as ViewMode[]).map((mode) => (
                             <button
                                 key={mode}
@@ -130,18 +130,27 @@ const PointsScreen: React.FC = () => {
                         ))}
                     </div>
 
-                    {viewMode === 'list' ? (
-                        <MatchupRoster
-                            selectedTeam={points.selectedTeam}
-                            opponentTeam={points.opponentTeam}
-                            onSelectPlayer={setActivePlayer}
-                        />
-                    ) : (
-                        <>
-                            <PitchRoster team={points.selectedTeam} onSelectPlayer={setActivePlayer} />
-                            <PitchRoster team={points.opponentTeam} onSelectPlayer={setActivePlayer} />
-                        </>
-                    )}
+                    {/* Tablet/desktop: respects the List/Pitch toggle above. */}
+                    <div className="is-hidden-mobile">
+                        {viewMode === 'list' ? (
+                            <MatchupRoster
+                                selectedTeam={points.selectedTeam}
+                                opponentTeam={points.opponentTeam}
+                                onSelectPlayer={setActivePlayer}
+                            />
+                        ) : (
+                            <div className="pitch-side-by-side">
+                                <PitchRoster team={points.selectedTeam} onSelectPlayer={setActivePlayer} />
+                                <PitchRoster team={points.opponentTeam} onSelectPlayer={setActivePlayer} />
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Mobile: pitch view only, no list view and no toggle. */}
+                    <div className="is-hidden-tablet">
+                        <PitchRoster team={points.selectedTeam} onSelectPlayer={setActivePlayer} />
+                        <PitchRoster team={points.opponentTeam} onSelectPlayer={setActivePlayer} />
+                    </div>
                 </>
             )}
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { TeamGameweekPoints, PlayerGameweekPoint } from '../types/gameweekPoints';
+import { getClubCrestUrl } from '../clubCrests';
 
 interface MatchupRosterProps {
     selectedTeam: TeamGameweekPoints;
@@ -45,11 +46,72 @@ const badgeColor = (player?: PlayerGameweekPoint) =>
 
 const badgeText = (player?: PlayerGameweekPoint) => (player?.started ? String(player.points) : '–');
 
+const upcomingFixtureText = (player: PlayerGameweekPoint) => `${player.opponent} ${player.isHome ? 'home' : 'away'}`;
+
+const RosterPlayerCell: React.FC<{
+    player?: PlayerGameweekPoint;
+    align: 'left' | 'right';
+    onSelect: () => void;
+}> = ({ player, align, onSelect }) => {
+    if (!player) {
+        return <div style={{ flex: 1, minWidth: 0 }} />;
+    }
+
+    const crestUrl = getClubCrestUrl(player.club);
+    const isRight = align === 'right';
+
+    return (
+        <div
+            onClick={onSelect}
+            style={{
+                flex: 1,
+                minWidth: 0,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: isRight ? 'flex-end' : 'flex-start',
+                gap: '2px',
+                cursor: 'pointer',
+            }}
+        >
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: isRight ? 'row-reverse' : 'row',
+                    alignItems: 'center',
+                    gap: '6px',
+                    minWidth: 0,
+                    maxWidth: '100%',
+                }}
+            >
+                {crestUrl ? (
+                    <img src={crestUrl} alt={player.club} style={{ width: '16px', height: '16px', flexShrink: 0 }} />
+                ) : (
+                    <span style={{ width: '16px', height: '16px', flexShrink: 0 }} />
+                )}
+                <span
+                    style={{
+                        fontSize: '14px',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        minWidth: 0,
+                    }}
+                >
+                    {player.name}
+                </span>
+            </div>
+            {!player.started && (
+                <span style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>{upcomingFixtureText(player)}</span>
+            )}
+        </div>
+    );
+};
+
 const MatchupRoster: React.FC<MatchupRosterProps> = ({ selectedTeam, opponentTeam, onSelectPlayer }) => {
     const rows = buildPairedRows(selectedTeam.players, opponentTeam.players);
 
     return (
-        <div className="card-surface" style={{ maxWidth: '680px', margin: '0 auto', overflow: 'hidden' }}>
+        <div className="card-surface" style={{ maxWidth: '760px', margin: '0 auto', overflow: 'hidden' }}>
             <div className="is-flex is-align-items-center" style={{ padding: '14px 20px', borderBottom: '1px solid var(--color-border)' }}>
                 <span
                     style={{
@@ -105,21 +167,7 @@ const MatchupRoster: React.FC<MatchupRosterProps> = ({ selectedTeam, opponentTea
                     </p>
                 ) : (
                     <div key={`row-${i}`} className="is-flex is-align-items-center" style={{ gap: '8px', padding: '8px 20px' }}>
-                        <span
-                            onClick={() => row.home && onSelectPlayer(row.home)}
-                            style={{
-                                flex: 1,
-                                minWidth: 0,
-                                textAlign: 'right',
-                                fontSize: '14px',
-                                whiteSpace: 'nowrap',
-                                overflow: 'hidden',
-                                textOverflow: 'ellipsis',
-                                cursor: 'pointer',
-                            }}
-                        >
-                            {row.home?.name}
-                        </span>
+                        <RosterPlayerCell player={row.home} align="right" onSelect={() => row.home && onSelectPlayer(row.home)} />
                         <span
                             onClick={() => row.home && onSelectPlayer(row.home)}
                             style={{ width: '40px', textAlign: 'center', fontSize: '14px', fontWeight: 800, color: badgeColor(row.home), cursor: 'pointer' }}
@@ -133,21 +181,7 @@ const MatchupRoster: React.FC<MatchupRosterProps> = ({ selectedTeam, opponentTea
                         >
                             {badgeText(row.away)}
                         </span>
-                        <span
-                            onClick={() => row.away && onSelectPlayer(row.away)}
-                            style={{
-                                flex: 1,
-                                minWidth: 0,
-                                textAlign: 'left',
-                                fontSize: '14px',
-                                whiteSpace: 'nowrap',
-                                overflow: 'hidden',
-                                textOverflow: 'ellipsis',
-                                cursor: 'pointer',
-                            }}
-                        >
-                            {row.away?.name}
-                        </span>
+                        <RosterPlayerCell player={row.away} align="left" onSelect={() => row.away && onSelectPlayer(row.away)} />
                     </div>
                 )
             )}
