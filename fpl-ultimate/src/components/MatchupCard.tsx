@@ -25,9 +25,7 @@ const MatchupCard: React.FC<MatchupCardProps> = ({ matchup }) => {
                         textAlign: 'right',
                         fontSize: '12px',
                         fontWeight: isMyHome ? 800 : 600,
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
+                        overflowWrap: 'break-word',
                     }}
                 >
                     {matchup.homeTeamName}
@@ -42,9 +40,7 @@ const MatchupCard: React.FC<MatchupCardProps> = ({ matchup }) => {
                         textAlign: 'left',
                         fontSize: '12px',
                         fontWeight: isMyAway ? 800 : 600,
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
+                        overflowWrap: 'break-word',
                     }}
                 >
                     {matchup.awayTeamName}
