@@ -13,6 +13,8 @@ League Table and My Team are built and live, restyled to the dark purple/blue/gr
 theme in the root-level `*.dc.html` mockups (see this repo's root `README.md`).
 Players, Login, and Signup are mockups only — not yet built.
 
+My Team has since grown past what those mockups show — see "My Team screen" below.
+
 ## Tech Stack
 
 - **React 18** + **TypeScript** (Create React App)
@@ -72,6 +74,46 @@ imported in `index.tsx` *before* `./index.css`. Bulma ships same-specificity rul
 if Bulma's CSS lands later in the bundle — it did once, and every table/button/select/modal
 rendered in Bulma's default light colors instead of the theme until the import order was
 fixed. Don't move the Bulma import into `App.tsx` or any component file.
+
+## My Team screen
+
+`PointsScreen.tsx` (nav label "My Team", `Tab` value `points`) has two ways to show
+a team's roster, both fed by `/league/gameweek-points`:
+
+- **List View** (`MatchupRoster.tsx`) — the merged home/away table from the mockup.
+  Desktop/tablet only (`is-hidden-mobile`); not offered on mobile at all.
+- **Pitch View** (`PitchRoster.tsx`) — NOT in the original mockups; added after they
+  shipped, modeled directly on `draft.premierleague.com`'s own Points → Pitch View
+  (visited live to copy its layout and assets). Players sit on a pitch background by
+  formation row (GKP/DEF/MID/FWD), bench below. Both teams' pitches render
+  side-by-side at desktop width (`≥1024px`, `.pitch-side-by-side` in `index.css`);
+  stack on narrower screens. **Mobile always shows Pitch View** — there's no
+  List/Pitch toggle below the tablet breakpoint (`is-hidden-tablet` block in
+  `PointsScreen.tsx` renders it unconditionally); List View's merged table doesn't
+  fit well that narrow.
+
+Both views share the same per-player conventions, sourced from the API:
+- **Name**: the API's `name` field is already FPL's own short `web_name` (last name
+  or common nickname, e.g. `Gabriel`, `J.Timber`) — display it as-is, don't try to
+  shorten a full name client-side.
+- **Club crest**: `getClubCrestUrl()` in `src/clubCrests.ts` maps the API's 3-letter
+  `club` short code to a `resources.premierleague.com/premierleague25/badges/<code>.svg`
+  URL, via a hardcoded short-code → numeric-team-code table (stable for a season;
+  source of truth is `bootstrap-static`'s `teams[].code`, same host the API's lambda
+  already calls). Used in both views — inline next to the name in List View, as the
+  marker icon in Pitch View.
+- **Not-yet-played placeholder**: instead of a bare "–", show the upcoming fixture as
+  `<opponent short code>(<H/A>)`, e.g. `LIV(A)` — built from the API's `opponent` +
+  `isHome` fields. In List View this replaces the points text in the score column
+  (widened to 56px to fit it); in Pitch View it replaces the points line under the
+  marker. `PlayerModal.tsx`'s "hasn't played yet" text uses the same format.
+- **Pitch background**: `PitchRoster.tsx`'s `PITCH_BACKGROUND_URL` points at
+  `draft.premierleague.com/assets/pitch-default-<hash>.svg` — the real pitch graphic
+  the official site uses, but it's a *hashed build asset* off their own bundle, not a
+  stable CDN path like the crest badges. It can 404 whenever they ship a new
+  build/deploy; if the pitch background silently disappears, that's almost certainly
+  why — re-visit the live site's Points → Pitch View and re-scrape the current
+  `pitch-default-*.svg` filename from a `background-image` computed style.
 
 ## Conventions
 

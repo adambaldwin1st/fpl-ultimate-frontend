@@ -65,3 +65,13 @@ operations are long-term and not mocked here yet.
 points), restyled to match these mockups' dark theme — see that app's
 `index.css` for the palette. **Not yet built:** Players, Login, Signup — these
 mockups are still just design reference for those three.
+
+**My Team has since grown past this mockup:** it now also has a Pitch View
+(players laid out on a pitch graphic by formation, club crest icons, real
+opponent-club-plus-home/away shown compactly e.g. `LIV(A)` in place of a
+bare "–" for anyone who hasn't played yet) alongside the List View shown
+here. None of that came from these `.dc.html` files — it was built by
+visiting the live `draft.premierleague.com` site directly and copying its
+own Pitch View. See `fpl-ultimate/CLAUDE.md`'s "My Team screen" section for
+the full detail (asset URLs, field formats, the mobile-forces-Pitch-View
+rule) before touching that screen.
